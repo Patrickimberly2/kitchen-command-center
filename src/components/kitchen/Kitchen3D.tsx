@@ -11,14 +11,18 @@ const UNIT_POSITIONS: Record<string, { pos: [number, number, number]; size: [num
   "FRIDGE": { pos: [-4, 2.75, -5.5], size: [3, 5.5, 2.7], type: 'appliance' },
   "FRIDGE-UPPER-L": { pos: [-4.75, 6, -5.5], size: [1.25, 1.25, 1], type: 'cabinet' },
   "FRIDGE-UPPER-R": { pos: [-3.25, 6, -5.5], size: [1.25, 1.25, 1], type: 'cabinet' },
-  // No upper cabinets above left peninsula (W1)
-  // Wall 1 base cabinets (only 2 remain on wall)
-  "W1-BASE-4": { pos: [-1.5, 1.25, -5.5], size: [1.25, 2.5, 2.6], type: 'cabinet' },
-  "W1-BASE-5": { pos: [-0.15, 1.25, -5.5], size: [1.25, 2.5, 2.6], type: 'cabinet' },
-  // Wall 1 Peninsula - 3 base cabinets at right angle from W1-BASE-4/5
-  "W1-BASE-1": { pos: [-0.15, 1.25, -3.5], size: [1.25, 2.5, 2.6], type: 'cabinet', handleDir: 'right' },
-  "W1-BASE-2": { pos: [-0.15, 1.25, -1.7], size: [1.25, 2.5, 2.6], type: 'cabinet', handleDir: 'right' },
-  "W1-BASE-3": { pos: [-0.15, 1.25, 0.1], size: [1.25, 2.5, 2.6], type: 'cabinet', handleDir: 'right' },
+  // Wall 1 base cabinets - all 5 straight across the wall, aligned with fridge
+  "W1-BASE-1": { pos: [-2.25, 1.25, -5.5], size: [1.25, 2.5, 2.6], type: 'cabinet' },
+  "W1-BASE-2": { pos: [-0.9, 1.25, -5.5], size: [1.25, 2.5, 2.6], type: 'cabinet' },
+  "W1-BASE-3": { pos: [0.45, 1.25, -5.5], size: [1.25, 2.5, 2.6], type: 'cabinet' },
+  "W1-BASE-4": { pos: [1.8, 1.25, -5.5], size: [1.25, 2.5, 2.6], type: 'cabinet' },
+  "W1-BASE-5": { pos: [3.15, 1.25, -5.5], size: [1.25, 2.5, 2.6], type: 'cabinet' },
+  // Wall 1 upper cabinets - above base cabinets
+  "W1-UPPER-1": { pos: [-2.25, 4.5, -5.5], size: [1.25, 2.5, 1], type: 'cabinet' },
+  "W1-UPPER-2": { pos: [-0.9, 4.5, -5.5], size: [1.25, 2.5, 1], type: 'cabinet' },
+  "W1-UPPER-3": { pos: [0.45, 4.5, -5.5], size: [1.25, 2.5, 1], type: 'cabinet' },
+  "W1-UPPER-4": { pos: [1.8, 4.5, -5.5], size: [1.25, 2.5, 1], type: 'cabinet' },
+  "W1-UPPER-5": { pos: [3.15, 4.5, -5.5], size: [1.25, 2.5, 1], type: 'cabinet' },
 
   // WALL-2: Sink & Stove Wall (parallel to Wall 1, facing it)
   "W2-UPPER-L1": { pos: [-10, 4.5, 5.5], size: [1, 2.5, 1], type: 'cabinet', handleDir: 'back' },
@@ -240,14 +244,9 @@ function Walls() {
 function Countertops() {
   return (
     <>
-      {/* Wall 1 base countertop (shorter now - just 2 cabinets) */}
-      <mesh position={[-0.8, 2.55, -5.5]}>
-        <boxGeometry args={[3, 0.08, 2.8]} />
-        <meshStandardMaterial color={COLORS.countertop} roughness={0.4} />
-      </mesh>
-      {/* Wall 1 peninsula countertop (3 cabinets at right angle) */}
-      <mesh position={[-0.15, 2.55, -1.5]}>
-        <boxGeometry args={[1.5, 0.08, 6]} />
+      {/* Wall 1 countertop - full length for 5 cabinets */}
+      <mesh position={[0.45, 2.55, -5.5]}>
+        <boxGeometry args={[7.5, 0.08, 2.8]} />
         <meshStandardMaterial color={COLORS.countertop} roughness={0.4} />
       </mesh>
       {/* Wall 2 countertop (parallel wall) */}
