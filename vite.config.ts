@@ -14,9 +14,24 @@ export default defineConfig(({ mode }) => ({
     alias: {
       "@": path.resolve(__dirname, "./src"),
     },
-    dedupe: ["react", "react-dom", "three"],
+    dedupe: [
+      "react", 
+      "react-dom", 
+      "three", 
+      "@react-three/fiber", 
+      "@react-three/drei",
+      "scheduler"
+    ],
   },
   optimizeDeps: {
-    include: ["react", "react-dom", "three", "@react-three/fiber", "@react-three/drei"],
+    include: [
+      "react", 
+      "react-dom", 
+      "three", 
+      "@react-three/fiber", 
+      "@react-three/drei",
+      "@radix-ui/react-tooltip"
+    ],
+    force: true,
   },
 }));
