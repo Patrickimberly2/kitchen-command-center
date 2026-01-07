@@ -11,9 +11,11 @@ const UNIT_POSITIONS: Record<string, { pos: [number, number, number]; size: [num
   "FRIDGE": { pos: [-4, 2.75, -5.5], size: [3, 5.5, 2.7], type: 'appliance' },
   "FRIDGE-UPPER-L": { pos: [-4.75, 6, -5.5], size: [1.25, 1.25, 1], type: 'cabinet' },
   "FRIDGE-UPPER-R": { pos: [-3.25, 6, -5.5], size: [1.25, 1.25, 1], type: 'cabinet' },
-  // Removed W1-UPPER-1, W1-UPPER-2, W1-UPPER-3 (next to freezer)
-  "W1-UPPER-4": { pos: [-1.5, 4.5, -5.5], size: [1.25, 2.5, 1], type: 'cabinet' },
-  "W1-UPPER-5": { pos: [-0.15, 4.5, -5.5], size: [1.25, 2.5, 1], type: 'cabinet' },
+  // Upper cabinets on Wall 1 (left side, closer to fridge)
+  "W1-UPPER-1": { pos: [-1.5, 4.5, -5.5], size: [1.25, 2.5, 1], type: 'cabinet' },
+  "W1-UPPER-2": { pos: [-0.15, 4.5, -5.5], size: [1.25, 2.5, 1], type: 'cabinet' },
+  "W1-UPPER-3": { pos: [1.2, 4.5, -5.5], size: [1.25, 2.5, 1], type: 'cabinet' },
+  // Removed W1-UPPER-4, W1-UPPER-5 (opposite side)
   // Wall 1 base cabinets (only 2 remain on wall)
   "W1-BASE-4": { pos: [-1.5, 1.25, -5.5], size: [1.25, 2.5, 2.6], type: 'cabinet' },
   "W1-BASE-5": { pos: [-0.15, 1.25, -5.5], size: [1.25, 2.5, 2.6], type: 'cabinet' },
