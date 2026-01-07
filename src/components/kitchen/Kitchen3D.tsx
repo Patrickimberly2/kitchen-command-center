@@ -27,7 +27,7 @@ const UNIT_POSITIONS: Record<string, { pos: [number, number, number]; size: [num
   // WALL-2: Sink & Stove Wall (parallel to Wall 1, facing it)
   "W2-UPPER-L1": { pos: [-10, 4.5, 5.5], size: [1, 2.5, 1], type: 'cabinet', handleDir: 'back' },
   "W2-UPPER-L2": { pos: [-8.65, 4.5, 5.5], size: [1, 2.5, 1], type: 'cabinet', handleDir: 'back' },
-  "W2-DRAWERS": { pos: [1.95, 1.25, 5.5], size: [1.25, 2.5, 2.6], type: 'drawer', handleDir: 'back' }, // Right side connects to front-left of PEN1-BASE-1
+  "W2-DRAWERS": { pos: [0.5, 1.25, 5.5], size: [1.25, 2.5, 2.6], type: 'drawer', handleDir: 'back' }, // Right side connects to front-left of PEN1-BASE-1
   // Old SINK location now has 2 cabinets (W2-BASE-L1 and W2-BASE-L2)
   "W2-BASE-L1": { pos: [-7.5, 1.25, 5.5], size: [1.5, 2.5, 2], type: 'cabinet', handleDir: 'back' },
   "W2-BASE-L2": { pos: [-6, 1.25, 5.5], size: [1.5, 2.5, 2], type: 'cabinet', handleDir: 'back' },
@@ -36,8 +36,8 @@ const UNIT_POSITIONS: Record<string, { pos: [number, number, number]; size: [num
   "DISHWASHER": { pos: [-2.5, 1.25, 5.5], size: [2, 2.5, 2], type: 'appliance', handleDir: 'back' },
   "W2-MICRO-UPPER-L": { pos: [-5.1, 5.5, 5.5], size: [1.2, 1.5, 1], type: 'cabinet', handleDir: 'back' },
   "W2-MICRO-UPPER-R": { pos: [-3.9, 5.5, 5.5], size: [1.2, 1.5, 1], type: 'cabinet', handleDir: 'back' },
-  // SINK now spans W2-BASE-R1, R2, R3 area
-  "SINK": { pos: [1.5, 1.25, 5.5], size: [5, 2.5, 2.6], type: 'cabinet', handleDir: 'back' },
+  // SINK slid over next to drawers
+  "SINK": { pos: [-0.8, 1.25, 5.5], size: [2.5, 2.5, 2.6], type: 'cabinet', handleDir: 'back' },
   "W2-UPPER-R1": { pos: [1, 4.5, 5.5], size: [1.25, 2.5, 1], type: 'cabinet', handleDir: 'back' },
   "W2-UPPER-R2": { pos: [2.5, 4.5, 5.5], size: [1.25, 2.5, 1], type: 'cabinet', handleDir: 'back' },
 
@@ -181,6 +181,44 @@ function UnitMesh({ unitId, label, isSelected, onClick }: UnitMeshProps) {
     );
   }
 
+  // Drawer unit rendering - 3 stacked drawers
+  if (type === 'drawer') {
+    const drawerHeight = size[1] / 3;
+    const drawerColor = COLORS.applianceWhite;
+    return (
+      <group position={pos}>
+        {[0, 1, 2].map((i) => (
+          <group key={`drawer-${i}`} position={[0, size[1] / 2 - drawerHeight * (i + 0.5), 0]}>
+            <RoundedBox
+              args={[size[0], drawerHeight - 0.05, size[2]]}
+              radius={0.02}
+              smoothness={4}
+              onClick={handleClick}
+              onPointerOver={(e) => { e.stopPropagation(); setHovered(true); }}
+              onPointerOut={() => setHovered(false)}
+            >
+              <meshStandardMaterial
+                color={isSelected ? "#c2410c" : hovered ? "#ea580c" : drawerColor}
+                roughness={0.5}
+                metalness={0.05}
+              />
+            </RoundedBox>
+            {/* Drawer handle */}
+            <mesh position={[0, 0, -size[2] / 2 - 0.02]}>
+              <boxGeometry args={[size[0] * 0.4, 0.04, 0.02]} />
+              <meshStandardMaterial color="#78716c" metalness={0.8} roughness={0.2} />
+            </mesh>
+          </group>
+        ))}
+        <Html position={[0, size[1] / 2 + 0.25, 0]} center distanceFactor={10} style={{ pointerEvents: "none" }}>
+          <div className={`rounded px-1.5 py-0.5 text-[10px] font-medium whitespace-nowrap ${
+            isSelected ? "bg-primary text-primary-foreground" : "bg-card/80 text-foreground border border-border"
+          }`}>{label}</div>
+        </Html>
+      </group>
+    );
+  }
+
   // Regular cabinet/appliance
   return (
     <group position={pos}>
@@ -290,8 +328,8 @@ function Microwave() {
 
 function SinkBasin() {
   return (
-    <mesh position={[1.5, 2.6, 5.35]}>
-      <boxGeometry args={[2.5, 0.5, 0.15]} />
+    <mesh position={[-0.8, 2.6, 5.35]}>
+      <boxGeometry args={[1.8, 0.5, 0.15]} />
       <meshStandardMaterial color={COLORS.stainless} metalness={0.9} roughness={0.1} />
     </mesh>
   );
