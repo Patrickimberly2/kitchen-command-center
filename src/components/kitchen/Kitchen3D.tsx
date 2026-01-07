@@ -28,14 +28,16 @@ const UNIT_POSITIONS: Record<string, { pos: [number, number, number]; size: [num
   "W2-UPPER-L1": { pos: [-10, 4.5, 5.5], size: [1, 2.5, 1], type: 'cabinet', handleDir: 'back' },
   "W2-UPPER-L2": { pos: [-8.65, 4.5, 5.5], size: [1, 2.5, 1], type: 'cabinet', handleDir: 'back' },
   "W2-DRAWERS": { pos: [-9.3, 1.25, 5.5], size: [1.25, 2.5, 1.5], type: 'drawer', handleDir: 'back' },
-  "SINK": { pos: [-7, 1.25, 5.5], size: [3, 2.5, 2], type: 'cabinet', handleDir: 'back' },
-  "DISHWASHER": { pos: [-5, 1.25, 5.5], size: [2, 2.5, 2], type: 'appliance', handleDir: 'back' },
-  "STOVE": { pos: [-2.5, 2.6, 5.5], size: [2.5, 0.15, 2], type: 'appliance' },
-  "W2-MICRO-UPPER-L": { pos: [-3.1, 5.5, 5.5], size: [1.2, 1.5, 1], type: 'cabinet', handleDir: 'back' },
-  "W2-MICRO-UPPER-R": { pos: [-1.9, 5.5, 5.5], size: [1.2, 1.5, 1], type: 'cabinet', handleDir: 'back' },
-  "W2-BASE-R1": { pos: [-0.2, 1.25, 5.5], size: [1.5, 2.5, 2.6], type: 'cabinet', handleDir: 'back' }, // Sink cabinet
-  "W2-BASE-R2": { pos: [1.5, 1.25, 5.5], size: [1.5, 2.5, 2.6], type: 'drawer', handleDir: 'back' }, // 3 stacked drawers
-  "W2-BASE-R3": { pos: [3.2, 1.25, 5.5], size: [1.5, 2.5, 2.6], type: 'cabinet', handleDir: 'back' },
+  // Old SINK location now has 2 cabinets (W2-BASE-L1 and W2-BASE-L2)
+  "W2-BASE-L1": { pos: [-7.5, 1.25, 5.5], size: [1.5, 2.5, 2], type: 'cabinet', handleDir: 'back' },
+  "W2-BASE-L2": { pos: [-6, 1.25, 5.5], size: [1.5, 2.5, 2], type: 'cabinet', handleDir: 'back' },
+  // STOVE and DISHWASHER swapped positions
+  "STOVE": { pos: [-4.5, 2.6, 5.5], size: [2.5, 0.15, 2], type: 'appliance' },
+  "DISHWASHER": { pos: [-2.5, 1.25, 5.5], size: [2, 2.5, 2], type: 'appliance', handleDir: 'back' },
+  "W2-MICRO-UPPER-L": { pos: [-5.1, 5.5, 5.5], size: [1.2, 1.5, 1], type: 'cabinet', handleDir: 'back' },
+  "W2-MICRO-UPPER-R": { pos: [-3.9, 5.5, 5.5], size: [1.2, 1.5, 1], type: 'cabinet', handleDir: 'back' },
+  // SINK now spans W2-BASE-R1, R2, R3 area
+  "SINK": { pos: [1.5, 1.25, 5.5], size: [5, 2.5, 2.6], type: 'cabinet', handleDir: 'back' },
   "W2-UPPER-R1": { pos: [1, 4.5, 5.5], size: [1.25, 2.5, 1], type: 'cabinet', handleDir: 'back' },
   "W2-UPPER-R2": { pos: [2.5, 4.5, 5.5], size: [1.25, 2.5, 1], type: 'cabinet', handleDir: 'back' },
 
@@ -288,8 +290,8 @@ function Microwave() {
 
 function SinkBasin() {
   return (
-    <mesh position={[-7, 2.6, 5.35]}>
-      <boxGeometry args={[1.5, 0.5, 0.15]} />
+    <mesh position={[1.5, 2.6, 5.35]}>
+      <boxGeometry args={[2.5, 0.5, 0.15]} />
       <meshStandardMaterial color={COLORS.stainless} metalness={0.9} roughness={0.1} />
     </mesh>
   );
