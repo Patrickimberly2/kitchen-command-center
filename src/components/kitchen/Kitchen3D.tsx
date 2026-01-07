@@ -291,23 +291,27 @@ function Walls() {
 function Countertops() {
   return (
     <>
-      {/* Wall 1 countertop - full length for 5 cabinets */}
+      {/* Wall 1 countertop - only covers W1-BASE-1 to W1-BASE-5 (not freezer/pantry/fridge) */}
+      {/* W1-BASE-1 left edge: -2.25 - 0.625 = -2.875, W1-BASE-5 right edge: 3.15 + 0.625 = 3.775 */}
+      {/* Center: (-2.875 + 3.775) / 2 = 0.45, Width: 3.775 - (-2.875) = 6.65 */}
       <mesh position={[0.45, 2.55, -5.5]}>
-        <boxGeometry args={[7.5, 0.08, 2.8]} />
+        <boxGeometry args={[6.65, 0.08, 2.8]} />
         <meshStandardMaterial color={COLORS.countertop} roughness={0.4} />
       </mesh>
-      {/* Wall 2 countertop (parallel wall) */}
-      <mesh position={[-2, 2.55, 5.5]}>
-        <boxGeometry args={[16, 0.08, 2.8]} />
+      {/* Wall 2 countertop - covers W2-BASE-L3 to W2-DRAWERS */}
+      {/* W2-BASE-L3 left edge: -9.425 - 0.75 = -10.175, W2-DRAWERS right edge: 1.95 + 0.625 = 2.575 */}
+      {/* Center: (-10.175 + 2.575) / 2 = -3.8, Width: 2.575 - (-10.175) = 12.75 */}
+      <mesh position={[-3.8, 2.55, 5.5]}>
+        <boxGeometry args={[12.75, 0.08, 2.8]} />
         <meshStandardMaterial color={COLORS.countertop} roughness={0.4} />
       </mesh>
-      {/* Peninsula 1 countertop */}
+      {/* Peninsula 1 countertop - covers PEN1-BASE-1 to PEN1-BASE-3 */}
       <mesh position={[3.2, 2.55, 1.6]}>
         <boxGeometry args={[2, 0.08, 6]} />
         <meshStandardMaterial color={COLORS.countertop} roughness={0.4} />
       </mesh>
-      {/* Peninsula 2 countertop */}
-      <mesh position={[-10, 2.55, -1.5]}>
+      {/* Peninsula 2 countertop - covers PEN2-BASE-1 to PEN2-BASE-3 */}
+      <mesh position={[-10, 2.55, 1.6]}>
         <boxGeometry args={[2, 0.08, 6]} />
         <meshStandardMaterial color={COLORS.countertop} roughness={0.4} />
       </mesh>
