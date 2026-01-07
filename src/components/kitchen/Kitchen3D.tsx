@@ -33,8 +33,8 @@ const UNIT_POSITIONS: Record<string, { pos: [number, number, number]; size: [num
   "STOVE": { pos: [-2.5, 2.6, 5.5], size: [2.5, 0.15, 2], type: 'appliance' },
   "W2-MICRO-UPPER-L": { pos: [-3.1, 5.5, 5.5], size: [1.2, 1.5, 1], type: 'cabinet', handleDir: 'back' },
   "W2-MICRO-UPPER-R": { pos: [-1.9, 5.5, 5.5], size: [1.2, 1.5, 1], type: 'cabinet', handleDir: 'back' },
-  "W2-BASE-R1": { pos: [-0.2, 1.25, 5.5], size: [1.5, 2.5, 2.6], type: 'cabinet', handleDir: 'back' },
-  "W2-BASE-R2": { pos: [1.5, 1.25, 5.5], size: [1.5, 2.5, 2.6], type: 'cabinet', handleDir: 'back' },
+  "W2-BASE-R1": { pos: [-0.2, 1.25, 5.5], size: [1.5, 2.5, 2.6], type: 'cabinet', handleDir: 'back' }, // Sink cabinet
+  "W2-BASE-R2": { pos: [1.5, 1.25, 5.5], size: [1.5, 2.5, 2.6], type: 'drawer', handleDir: 'back' }, // 3 stacked drawers
   "W2-BASE-R3": { pos: [3.2, 1.25, 5.5], size: [1.5, 2.5, 2.6], type: 'cabinet', handleDir: 'back' },
   "W2-UPPER-R1": { pos: [1, 4.5, 5.5], size: [1.25, 2.5, 1], type: 'cabinet', handleDir: 'back' },
   "W2-UPPER-R2": { pos: [2.5, 4.5, 5.5], size: [1.25, 2.5, 1], type: 'cabinet', handleDir: 'back' },
