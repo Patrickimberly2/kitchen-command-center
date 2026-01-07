@@ -32,9 +32,10 @@ const UNIT_POSITIONS: Record<string, { pos: [number, number, number]; size: [num
   // Old SINK location now has 2 cabinets (W2-BASE-L1 and W2-BASE-L2)
   "W2-BASE-L1": { pos: [-7.5, 1.25, 5.5], size: [1.5, 2.5, 2], type: 'cabinet', handleDir: 'back' },
   "W2-BASE-L2": { pos: [-6, 1.25, 5.5], size: [1.5, 2.5, 2], type: 'cabinet', handleDir: 'back' },
-  // STOVE and DISHWASHER swapped positions
-  "STOVE": { pos: [-4.5, 2.6, 5.5], size: [2.5, 0.15, 2], type: 'appliance' },
-  "DISHWASHER": { pos: [-2.5, 1.25, 5.5], size: [2, 2.5, 2], type: 'appliance', handleDir: 'back' },
+  // DISHWASHER: right edge connects to left edge of SINK
+  "DISHWASHER": { pos: [-2.175, 1.25, 5.5], size: [2, 2.5, 2.6], type: 'appliance', handleDir: 'back' },
+  // STOVE: right edge connects to left edge of DISHWASHER
+  "STOVE": { pos: [-4.425, 2.6, 5.5], size: [2.5, 0.15, 2.6], type: 'appliance' },
   "W2-MICRO-UPPER-L": { pos: [-5.1, 5.5, 5.5], size: [1.2, 1.5, 1], type: 'cabinet', handleDir: 'back' },
   "W2-MICRO-UPPER-R": { pos: [-3.9, 5.5, 5.5], size: [1.2, 1.5, 1], type: 'cabinet', handleDir: 'back' },
   // SINK: right edge connects to left edge of drawers
