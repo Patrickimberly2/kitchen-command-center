@@ -58,10 +58,12 @@ const UNIT_POSITIONS: Record<string, { pos: [number, number, number]; size: [num
   "PEN1-UPPER-3": { pos: [3.2, 4.5, 0.6], size: [1.25, 2.5, 1], type: 'cabinet', handleDir: 'left' },
   "PEN1-UPPER-4": { pos: [3.2, 4.5, -0.8], size: [1.25, 2.5, 1], type: 'cabinet', handleDir: 'left' },
 
-  // PENINSULA 2 - Display Peninsula (perpendicular, off left end of Wall 2) - NO upper cabinets
-  "PEN2-BASE-1": { pos: [-10, 1.25, 3.4], size: [1.25, 2.5, 2.6], type: 'cabinet', handleDir: 'right' },
-  "PEN2-BASE-2": { pos: [-10, 1.25, 1.6], size: [1.5, 2.5, 2.6], type: 'cabinet', handleDir: 'right' },
-  "PEN2-BASE-3": { pos: [-10, 1.25, -0.2], size: [1.5, 2.5, 2.6], type: 'cabinet', handleDir: 'right' },
+  // PENINSULA 2 - Display Peninsula: front-right of PEN2-BASE-1 connects to front-right of W2-BASE-L3
+  // W2-BASE-L3 front-right corner: x = -8.675, z = 4.2
+  // PEN2-BASE-1 size [1.5, 2.5, 2.6]: center x = -9.425, center z = 2.9
+  "PEN2-BASE-1": { pos: [-9.425, 1.25, 2.9], size: [1.5, 2.5, 2.6], type: 'cabinet', handleDir: 'right' },
+  "PEN2-BASE-2": { pos: [-9.425, 1.25, 0.3], size: [1.5, 2.5, 2.6], type: 'cabinet', handleDir: 'right' },
+  "PEN2-BASE-3": { pos: [-9.425, 1.25, -2.3], size: [1.5, 2.5, 2.6], type: 'cabinet', handleDir: 'right' },
 
   // ISLAND - Detached, centered between the two walls
   "ISL-1": { pos: [-3, 1.25, 0], size: [1.25, 2.5, 2.6], type: 'cabinet' },
@@ -311,8 +313,9 @@ function Countertops() {
         <meshStandardMaterial color={COLORS.countertop} roughness={0.4} />
       </mesh>
       {/* Peninsula 2 countertop - covers PEN2-BASE-1 to PEN2-BASE-3 */}
-      <mesh position={[-10, 2.55, 1.6]}>
-        <boxGeometry args={[2, 0.08, 6]} />
+      {/* From z = 2.9 + 1.3 = 4.2 to z = -2.3 - 1.3 = -3.6, center z = 0.3, length = 7.8 */}
+      <mesh position={[-9.425, 2.55, 0.3]}>
+        <boxGeometry args={[1.7, 0.08, 7.8]} />
         <meshStandardMaterial color={COLORS.countertop} roughness={0.4} />
       </mesh>
       {/* Island countertop */}
