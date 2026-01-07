@@ -45,14 +45,10 @@ const UNIT_POSITIONS: Record<string, { pos: [number, number, number]; size: [num
   "PEN1-UPPER-3": { pos: [3.2, 4.5, 0.6], size: [1.25, 2.5, 1], type: 'cabinet', handleDir: 'left' },
   "PEN1-UPPER-4": { pos: [3.2, 4.5, -0.8], size: [1.25, 2.5, 1], type: 'cabinet', handleDir: 'left' },
 
-  // PENINSULA 2 - Display Peninsula (perpendicular, off left end of Wall 1)
-  "PEN2-BASE-1": { pos: [-10, 1.25, -3.5], size: [1.25, 2.5, 2.6], type: 'cabinet', handleDir: 'right' },
-  "PEN2-BASE-2": { pos: [-10, 1.25, -1.7], size: [1.5, 2.5, 2.6], type: 'cabinet', handleDir: 'right' },
-  "PEN2-BASE-3": { pos: [-10, 1.25, 0.1], size: [1.5, 2.5, 2.6], type: 'cabinet', handleDir: 'right' },
-  "PEN2-UPPER-1": { pos: [-10, 4.2, -3.5], size: [1.25, 2, 1], type: 'glass' },
-  "PEN2-UPPER-2": { pos: [-10, 4.2, -2.1], size: [1.25, 2, 1], type: 'glass' },
-  "PEN2-UPPER-3": { pos: [-10, 4.2, -0.7], size: [1.25, 2, 1], type: 'glass' },
-  "PEN2-UPPER-4": { pos: [-10, 4.2, 0.7], size: [1.25, 2, 1], type: 'glass' },
+  // PENINSULA 2 - Display Peninsula (perpendicular, off left end of Wall 2) - NO upper cabinets
+  "PEN2-BASE-1": { pos: [-10, 1.25, 3.4], size: [1.25, 2.5, 2.6], type: 'cabinet', handleDir: 'right' },
+  "PEN2-BASE-2": { pos: [-10, 1.25, 1.6], size: [1.5, 2.5, 2.6], type: 'cabinet', handleDir: 'right' },
+  "PEN2-BASE-3": { pos: [-10, 1.25, -0.2], size: [1.5, 2.5, 2.6], type: 'cabinet', handleDir: 'right' },
 
   // ISLAND - Detached, centered between the two walls
   "ISL-1": { pos: [-3, 1.25, 0], size: [1.25, 2.5, 2.6], type: 'cabinet' },
