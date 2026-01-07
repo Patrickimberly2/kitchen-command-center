@@ -11,11 +11,7 @@ const UNIT_POSITIONS: Record<string, { pos: [number, number, number]; size: [num
   "FRIDGE": { pos: [-4, 2.75, -5.5], size: [3, 5.5, 2.7], type: 'appliance' },
   "FRIDGE-UPPER-L": { pos: [-4.75, 6, -5.5], size: [1.25, 1.25, 1], type: 'cabinet' },
   "FRIDGE-UPPER-R": { pos: [-3.25, 6, -5.5], size: [1.25, 1.25, 1], type: 'cabinet' },
-  // Upper cabinets on Wall 1 (left side, closer to fridge)
-  "W1-UPPER-1": { pos: [-1.5, 4.5, -5.5], size: [1.25, 2.5, 1], type: 'cabinet' },
-  "W1-UPPER-2": { pos: [-0.15, 4.5, -5.5], size: [1.25, 2.5, 1], type: 'cabinet' },
-  "W1-UPPER-3": { pos: [1.2, 4.5, -5.5], size: [1.25, 2.5, 1], type: 'cabinet' },
-  // Removed W1-UPPER-4, W1-UPPER-5 (opposite side)
+  // No upper cabinets above left peninsula (W1)
   // Wall 1 base cabinets (only 2 remain on wall)
   "W1-BASE-4": { pos: [-1.5, 1.25, -5.5], size: [1.25, 2.5, 2.6], type: 'cabinet' },
   "W1-BASE-5": { pos: [-0.15, 1.25, -5.5], size: [1.25, 2.5, 2.6], type: 'cabinet' },
@@ -43,6 +39,11 @@ const UNIT_POSITIONS: Record<string, { pos: [number, number, number]; size: [num
   "PEN1-BASE-1": { pos: [3.2, 1.25, 3.4], size: [1.25, 2.5, 2.6], type: 'cabinet' },
   "PEN1-BASE-2": { pos: [3.2, 1.25, 1.6], size: [1.5, 2.5, 2.6], type: 'cabinet' },
   "PEN1-BASE-3": { pos: [3.2, 1.25, -0.2], size: [1.5, 2.5, 2.6], type: 'cabinet' },
+  // Upper cabinets above Peninsula 1 (4 cabinets)
+  "PEN1-UPPER-1": { pos: [3.2, 4.5, 3.4], size: [1.25, 2.5, 1], type: 'cabinet', handleDir: 'left' },
+  "PEN1-UPPER-2": { pos: [3.2, 4.5, 2], size: [1.25, 2.5, 1], type: 'cabinet', handleDir: 'left' },
+  "PEN1-UPPER-3": { pos: [3.2, 4.5, 0.6], size: [1.25, 2.5, 1], type: 'cabinet', handleDir: 'left' },
+  "PEN1-UPPER-4": { pos: [3.2, 4.5, -0.8], size: [1.25, 2.5, 1], type: 'cabinet', handleDir: 'left' },
 
   // PENINSULA 2 - Display Peninsula (perpendicular, off left end of Wall 1)
   "PEN2-BASE-1": { pos: [-10, 1.25, -3.5], size: [1.25, 2.5, 2.6], type: 'cabinet', handleDir: 'right' },
