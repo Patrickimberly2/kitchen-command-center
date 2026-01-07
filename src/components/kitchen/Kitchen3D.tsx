@@ -39,11 +39,15 @@ const UNIT_POSITIONS: Record<string, { pos: [number, number, number]; size: [num
   "W2-UPPER-R1": { pos: [1, 4.5, 5.5], size: [1.25, 2.5, 1], type: 'cabinet', handleDir: 'back' },
   "W2-UPPER-R2": { pos: [2.5, 4.5, 5.5], size: [1.25, 2.5, 1], type: 'cabinet', handleDir: 'back' },
 
-  // PENINSULA 1 - Bar Wall (perpendicular, off right end of Wall 2)
-  "PEN1-BASE-1": { pos: [3.2, 1.25, 3.4], size: [1.25, 2.5, 2.6], type: 'cabinet' },
-  "PEN1-BASE-2": { pos: [3.2, 1.25, 1.6], size: [1.5, 2.5, 2.6], type: 'cabinet' },
-  "PEN1-BASE-3": { pos: [3.2, 1.25, -0.2], size: [1.5, 2.5, 2.6], type: 'cabinet' },
-  // Upper cabinets above Peninsula 1 (4 cabinets)
+  // PENINSULA 1 - perpendicular off right end of Wall 2
+  "PEN1-BASE-1": { pos: [3.2, 1.25, 3.4], size: [1.25, 2.5, 2.6], type: 'cabinet', handleDir: 'left' },
+  "PEN1-BASE-2": { pos: [3.2, 1.25, 1.6], size: [1.5, 2.5, 2.6], type: 'cabinet', handleDir: 'left' },
+  "PEN1-BASE-3": { pos: [3.2, 1.25, -0.2], size: [1.5, 2.5, 2.6], type: 'cabinet', handleDir: 'left' },
+  // 3 stacked drawers at left angle from PEN1-BASE-3
+  "PEN1-DRAWER-1": { pos: [1.5, 1.25, -0.2], size: [1.25, 2.5, 2.6], type: 'drawer', handleDir: 'front' },
+  "PEN1-DRAWER-2": { pos: [0.1, 1.25, -0.2], size: [1.25, 2.5, 2.6], type: 'drawer', handleDir: 'front' },
+  "PEN1-DRAWER-3": { pos: [-1.3, 1.25, -0.2], size: [1.25, 2.5, 2.6], type: 'drawer', handleDir: 'front' },
+  // Upper cabinets above Peninsula 1 base cabinets (4 cabinets)
   "PEN1-UPPER-1": { pos: [3.2, 4.5, 3.4], size: [1.25, 2.5, 1], type: 'cabinet', handleDir: 'left' },
   "PEN1-UPPER-2": { pos: [3.2, 4.5, 2], size: [1.25, 2.5, 1], type: 'cabinet', handleDir: 'left' },
   "PEN1-UPPER-3": { pos: [3.2, 4.5, 0.6], size: [1.25, 2.5, 1], type: 'cabinet', handleDir: 'left' },
