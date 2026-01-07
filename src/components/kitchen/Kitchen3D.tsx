@@ -22,38 +22,38 @@ const UNIT_POSITIONS: Record<string, { pos: [number, number, number]; size: [num
   "W1-BASE-4": { pos: [2.55, 1.25, -5.5], size: [1.25, 2.5, 2.6], type: 'cabinet' },
   "W1-BASE-5": { pos: [3.9, 1.25, -5.5], size: [1.25, 2.5, 2.6], type: 'cabinet' },
 
-  // WALL-2: Sink & Stove Wall
-  "W2-UPPER-L1": { pos: [-10.5, 4.5, -2.5], size: [1, 2.5, 1], type: 'cabinet', handleDir: 'right' },
-  "W2-UPPER-L2": { pos: [-10.5, 4.5, -1.4], size: [1, 2.5, 1], type: 'cabinet', handleDir: 'right' },
-  "W2-DRAWERS": { pos: [-10.5, 1.25, -2], size: [1.25, 2.5, 1.5], type: 'drawer', handleDir: 'right' },
-  "SINK": { pos: [-10.5, 1.25, 0], size: [2, 2.5, 3], type: 'cabinet', handleDir: 'right' },
-  "DISHWASHER": { pos: [-10.5, 1.25, 2], size: [2, 2.5, 2], type: 'appliance', handleDir: 'right' },
-  "STOVE": { pos: [-10.5, 2.6, 4], size: [2, 0.15, 2.5], type: 'appliance' },
-  "W2-MICRO-UPPER-L": { pos: [-10.5, 5.5, 3.4], size: [1, 1.5, 1.2], type: 'cabinet', handleDir: 'right' },
-  "W2-MICRO-UPPER-R": { pos: [-10.5, 5.5, 4.6], size: [1, 1.5, 1.2], type: 'cabinet', handleDir: 'right' },
-  "W2-BASE-R1": { pos: [-10.5, 1.25, 6], size: [1.5, 2.5, 2.6], type: 'cabinet', handleDir: 'right' },
-  "W2-BASE-R2": { pos: [-10.5, 1.25, 7.7], size: [1.5, 2.5, 2.6], type: 'cabinet', handleDir: 'right' },
-  "W2-BASE-R3": { pos: [-10.5, 1.25, 9.4], size: [1.5, 2.5, 2.6], type: 'cabinet', handleDir: 'right' },
-  "W2-UPPER-R1": { pos: [-10.5, 4.5, 6.5], size: [1.25, 2.5, 1], type: 'cabinet', handleDir: 'right' },
-  "W2-UPPER-R2": { pos: [-10.5, 4.5, 8], size: [1.25, 2.5, 1], type: 'cabinet', handleDir: 'right' },
+  // WALL-2: Sink & Stove Wall (parallel to Wall 1, facing it)
+  "W2-UPPER-L1": { pos: [-10, 4.5, 5.5], size: [1, 2.5, 1], type: 'cabinet', handleDir: 'back' },
+  "W2-UPPER-L2": { pos: [-8.65, 4.5, 5.5], size: [1, 2.5, 1], type: 'cabinet', handleDir: 'back' },
+  "W2-DRAWERS": { pos: [-9.3, 1.25, 5.5], size: [1.25, 2.5, 1.5], type: 'drawer', handleDir: 'back' },
+  "SINK": { pos: [-7, 1.25, 5.5], size: [3, 2.5, 2], type: 'cabinet', handleDir: 'back' },
+  "DISHWASHER": { pos: [-5, 1.25, 5.5], size: [2, 2.5, 2], type: 'appliance', handleDir: 'back' },
+  "STOVE": { pos: [-2.5, 2.6, 5.5], size: [2.5, 0.15, 2], type: 'appliance' },
+  "W2-MICRO-UPPER-L": { pos: [-3.1, 5.5, 5.5], size: [1.2, 1.5, 1], type: 'cabinet', handleDir: 'back' },
+  "W2-MICRO-UPPER-R": { pos: [-1.9, 5.5, 5.5], size: [1.2, 1.5, 1], type: 'cabinet', handleDir: 'back' },
+  "W2-BASE-R1": { pos: [-0.2, 1.25, 5.5], size: [1.5, 2.5, 2.6], type: 'cabinet', handleDir: 'back' },
+  "W2-BASE-R2": { pos: [1.5, 1.25, 5.5], size: [1.5, 2.5, 2.6], type: 'cabinet', handleDir: 'back' },
+  "W2-BASE-R3": { pos: [3.2, 1.25, 5.5], size: [1.5, 2.5, 2.6], type: 'cabinet', handleDir: 'back' },
+  "W2-UPPER-R1": { pos: [1, 4.5, 5.5], size: [1.25, 2.5, 1], type: 'cabinet', handleDir: 'back' },
+  "W2-UPPER-R2": { pos: [2.5, 4.5, 5.5], size: [1.25, 2.5, 1], type: 'cabinet', handleDir: 'back' },
 
-  // PENINSULA 1 - Bar Wall (perpendicular to Wall 2)
-  "PEN1-BASE-1": { pos: [-8.5, 1.25, 9.4], size: [1.25, 2.5, 2.6], type: 'cabinet' },
-  "PEN1-BASE-2": { pos: [-6.8, 1.25, 9.4], size: [1.5, 2.5, 2.6], type: 'cabinet' },
-  "PEN1-BASE-3": { pos: [-5, 1.25, 9.4], size: [1.5, 2.5, 2.6], type: 'cabinet' },
+  // PENINSULA 1 - Bar Wall (perpendicular, off right end of Wall 2)
+  "PEN1-BASE-1": { pos: [3.2, 1.25, 3.4], size: [1.25, 2.5, 2.6], type: 'cabinet' },
+  "PEN1-BASE-2": { pos: [3.2, 1.25, 1.6], size: [1.5, 2.5, 2.6], type: 'cabinet' },
+  "PEN1-BASE-3": { pos: [3.2, 1.25, -0.2], size: [1.5, 2.5, 2.6], type: 'cabinet' },
 
-  // PENINSULA 2 - Display Peninsula (perpendicular, opposite)
-  "PEN2-BASE-1": { pos: [5.5, 1.25, -3.5], size: [1.25, 2.5, 2.6], type: 'cabinet', handleDir: 'left' },
-  "PEN2-BASE-2": { pos: [5.5, 1.25, -1.7], size: [1.5, 2.5, 2.6], type: 'cabinet', handleDir: 'left' },
-  "PEN2-BASE-3": { pos: [5.5, 1.25, 0.1], size: [1.5, 2.5, 2.6], type: 'cabinet', handleDir: 'left' },
-  "PEN2-UPPER-1": { pos: [5.5, 4.2, -3.5], size: [1.25, 2, 1], type: 'glass' },
-  "PEN2-UPPER-2": { pos: [5.5, 4.2, -2.1], size: [1.25, 2, 1], type: 'glass' },
-  "PEN2-UPPER-3": { pos: [5.5, 4.2, -0.7], size: [1.25, 2, 1], type: 'glass' },
-  "PEN2-UPPER-4": { pos: [5.5, 4.2, 0.7], size: [1.25, 2, 1], type: 'glass' },
+  // PENINSULA 2 - Display Peninsula (perpendicular, off left end of Wall 1)
+  "PEN2-BASE-1": { pos: [-10, 1.25, -3.5], size: [1.25, 2.5, 2.6], type: 'cabinet', handleDir: 'right' },
+  "PEN2-BASE-2": { pos: [-10, 1.25, -1.7], size: [1.5, 2.5, 2.6], type: 'cabinet', handleDir: 'right' },
+  "PEN2-BASE-3": { pos: [-10, 1.25, 0.1], size: [1.5, 2.5, 2.6], type: 'cabinet', handleDir: 'right' },
+  "PEN2-UPPER-1": { pos: [-10, 4.2, -3.5], size: [1.25, 2, 1], type: 'glass' },
+  "PEN2-UPPER-2": { pos: [-10, 4.2, -2.1], size: [1.25, 2, 1], type: 'glass' },
+  "PEN2-UPPER-3": { pos: [-10, 4.2, -0.7], size: [1.25, 2, 1], type: 'glass' },
+  "PEN2-UPPER-4": { pos: [-10, 4.2, 0.7], size: [1.25, 2, 1], type: 'glass' },
 
-  // ISLAND - Detached, centered
-  "ISL-1": { pos: [-2, 1.25, 2], size: [1.25, 2.5, 2.6], type: 'cabinet' },
-  "ISL-2": { pos: [-0.5, 1.25, 2], size: [1.25, 2.5, 2.6], type: 'cabinet' },
+  // ISLAND - Detached, centered between the two walls
+  "ISL-1": { pos: [-3, 1.25, 0], size: [1.25, 2.5, 2.6], type: 'cabinet' },
+  "ISL-2": { pos: [-1.5, 1.25, 0], size: [1.25, 2.5, 2.6], type: 'cabinet' },
 };
 
 // Color palette
@@ -216,7 +216,7 @@ function Floor() {
 function Walls() {
   return (
     <>
-      {/* Wall 1 - Back */}
+      {/* Wall 1 - Back (Fridge/Pantry wall) */}
       <mesh position={[-2, 4, -6.5]}>
         <boxGeometry args={[18, 8, 0.2]} />
         <meshStandardMaterial color="#ffffff" roughness={0.9} />
@@ -225,13 +225,13 @@ function Walls() {
         <boxGeometry args={[18, 0.3, 0.25]} />
         <meshStandardMaterial color="#4a5568" roughness={0.8} />
       </mesh>
-      {/* Wall 2 - Left */}
-      <mesh position={[-11.5, 4, 3]} rotation={[0, 0, 0]}>
-        <boxGeometry args={[0.2, 8, 20]} />
+      {/* Wall 2 - Front (Sink/Stove wall, parallel to Wall 1) */}
+      <mesh position={[-2, 4, 6.5]}>
+        <boxGeometry args={[18, 8, 0.2]} />
         <meshStandardMaterial color="#ffffff" roughness={0.9} />
       </mesh>
-      <mesh position={[-11.5, 7.85, 3]}>
-        <boxGeometry args={[0.25, 0.3, 20]} />
+      <mesh position={[-2, 7.85, 6.5]}>
+        <boxGeometry args={[18, 0.3, 0.25]} />
         <meshStandardMaterial color="#4a5568" roughness={0.8} />
       </mesh>
     </>
@@ -246,23 +246,23 @@ function Countertops() {
         <boxGeometry args={[7, 0.08, 2.8]} />
         <meshStandardMaterial color={COLORS.countertop} roughness={0.4} />
       </mesh>
-      {/* Wall 2 countertop */}
-      <mesh position={[-10.5, 2.55, 3]}>
-        <boxGeometry args={[2.2, 0.08, 12]} />
+      {/* Wall 2 countertop (parallel wall) */}
+      <mesh position={[-2, 2.55, 5.5]}>
+        <boxGeometry args={[16, 0.08, 2.8]} />
         <meshStandardMaterial color={COLORS.countertop} roughness={0.4} />
       </mesh>
       {/* Peninsula 1 countertop */}
-      <mesh position={[-6.7, 2.55, 9.4]}>
-        <boxGeometry args={[5.5, 0.08, 2.8]} />
+      <mesh position={[3.2, 2.55, 1.6]}>
+        <boxGeometry args={[2, 0.08, 6]} />
         <meshStandardMaterial color={COLORS.countertop} roughness={0.4} />
       </mesh>
       {/* Peninsula 2 countertop */}
-      <mesh position={[5.5, 2.55, -1.5]}>
+      <mesh position={[-10, 2.55, -1.5]}>
         <boxGeometry args={[2, 0.08, 6]} />
         <meshStandardMaterial color={COLORS.countertop} roughness={0.4} />
       </mesh>
       {/* Island countertop */}
-      <mesh position={[-1.25, 2.55, 2]}>
+      <mesh position={[-2.25, 2.55, 0]}>
         <boxGeometry args={[3, 0.08, 2.8]} />
         <meshStandardMaterial color={COLORS.countertop} roughness={0.4} />
       </mesh>
@@ -272,8 +272,8 @@ function Countertops() {
 
 function Microwave() {
   return (
-    <mesh position={[-10.5, 4, 4]}>
-      <boxGeometry args={[1.5, 1.2, 2.5]} />
+    <mesh position={[-2.5, 4, 5.5]}>
+      <boxGeometry args={[2.5, 1.2, 1.5]} />
       <meshStandardMaterial color="#4a4063" metalness={0.5} roughness={0.3} />
     </mesh>
   );
@@ -281,8 +281,8 @@ function Microwave() {
 
 function SinkBasin() {
   return (
-    <mesh position={[-10.35, 2.6, 0]}>
-      <boxGeometry args={[0.15, 0.5, 1.5]} />
+    <mesh position={[-7, 2.6, 5.35]}>
+      <boxGeometry args={[1.5, 0.5, 0.15]} />
       <meshStandardMaterial color={COLORS.stainless} metalness={0.9} roughness={0.1} />
     </mesh>
   );
