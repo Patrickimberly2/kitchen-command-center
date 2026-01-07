@@ -29,12 +29,13 @@ const UNIT_POSITIONS: Record<string, { pos: [number, number, number]; size: [num
   "W2-UPPER-L2": { pos: [-8.65, 4.5, 5.5], size: [1, 2.5, 1], type: 'cabinet', handleDir: 'back' },
   // W2-DRAWERS: right edge connects to front-left of PEN1-BASE-1
   "W2-DRAWERS": { pos: [1.95, 1.25, 5.5], size: [1.25, 2.5, 2.6], type: 'drawer', handleDir: 'back' },
-  // Old SINK location now has 2 cabinets (W2-BASE-L1 and W2-BASE-L2)
-  "W2-BASE-L1": { pos: [-7.5, 1.25, 5.5], size: [1.5, 2.5, 2], type: 'cabinet', handleDir: 'back' },
-  "W2-BASE-L2": { pos: [-6, 1.25, 5.5], size: [1.5, 2.5, 2], type: 'cabinet', handleDir: 'back' },
+  // W2-BASE-L1, L2, L3: connected to left edge of STOVE
+  "W2-BASE-L1": { pos: [-6.425, 1.25, 5.5], size: [1.5, 2.5, 2.6], type: 'cabinet', handleDir: 'back' },
+  "W2-BASE-L2": { pos: [-7.925, 1.25, 5.5], size: [1.5, 2.5, 2.6], type: 'cabinet', handleDir: 'back' },
+  "W2-BASE-L3": { pos: [-9.425, 1.25, 5.5], size: [1.5, 2.5, 2.6], type: 'cabinet', handleDir: 'back' },
   // DISHWASHER: right edge connects to left edge of SINK
   "DISHWASHER": { pos: [-2.175, 1.25, 5.5], size: [2, 2.5, 2.6], type: 'appliance', handleDir: 'back' },
-  // STOVE: right edge connects to left edge of DISHWASHER
+  // STOVE: right edge connects to left edge of DISHWASHER, left edge connects to W2-BASE-L1
   "STOVE": { pos: [-4.425, 2.6, 5.5], size: [2.5, 0.15, 2.6], type: 'appliance' },
   "W2-MICRO-UPPER-L": { pos: [-5.1, 5.5, 5.5], size: [1.2, 1.5, 1], type: 'cabinet', handleDir: 'back' },
   "W2-MICRO-UPPER-R": { pos: [-3.9, 5.5, 5.5], size: [1.2, 1.5, 1], type: 'cabinet', handleDir: 'back' },
