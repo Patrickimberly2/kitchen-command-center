@@ -27,7 +27,7 @@ const UNIT_POSITIONS: Record<string, { pos: [number, number, number]; size: [num
   // WALL-2: Sink & Stove Wall (parallel to Wall 1, facing it)
   "W2-UPPER-L1": { pos: [-10, 4.5, 5.5], size: [1, 2.5, 1], type: 'cabinet', handleDir: 'back' },
   "W2-UPPER-L2": { pos: [-8.65, 4.5, 5.5], size: [1, 2.5, 1], type: 'cabinet', handleDir: 'back' },
-  "W2-DRAWERS": { pos: [3.2, 1.25, 5.5], size: [1.25, 2.5, 2.6], type: 'drawer', handleDir: 'back' }, // Connected to PEN1-BASE-1 at right angle
+  "W2-DRAWERS": { pos: [1.95, 1.25, 5.5], size: [1.25, 2.5, 2.6], type: 'drawer', handleDir: 'back' }, // Right side connects to front-left of PEN1-BASE-1
   // Old SINK location now has 2 cabinets (W2-BASE-L1 and W2-BASE-L2)
   "W2-BASE-L1": { pos: [-7.5, 1.25, 5.5], size: [1.5, 2.5, 2], type: 'cabinet', handleDir: 'back' },
   "W2-BASE-L2": { pos: [-6, 1.25, 5.5], size: [1.5, 2.5, 2], type: 'cabinet', handleDir: 'back' },
