@@ -52,20 +52,20 @@ export const kitchenLayout: Area[] = [
       { id: "W2-UPPER-L2", label: "Upper Left 2", zones: ["Shelf"] },
       // 3-drawer stack (15"W × 18"D)
       { id: "W2-DRAWERS", label: "Drawer Stack", zones: ["Top Drawer", "Middle Drawer", "Bottom Drawer (Deep)"] },
-      // Double-bowl sink with 2-door base cabinet
-      { id: "SINK", label: "Sink Cabinet", zones: ["Left Door", "Right Door"] },
-      // Built-in dishwasher
-      { id: "DISHWASHER", label: "Dishwasher", zones: ["Main"] },
+      // Three base cabinets to left of stove
+      { id: "W2-BASE-L1", label: "Base Left 1", zones: ["Main"] },
+      { id: "W2-BASE-L2", label: "Base Left 2", zones: ["Main"] },
+      { id: "W2-BASE-L3", label: "Base Left 3", zones: ["Main"] },
       // Stove (appliance, no storage)
       { id: "STOVE", label: "Stove", zones: [] },
+      // Built-in dishwasher
+      { id: "DISHWASHER", label: "Dishwasher", zones: ["Main"] },
+      // Double-bowl sink with 2-door base cabinet
+      { id: "SINK", label: "Sink Cabinet", zones: ["Left Door", "Right Door"] },
       // Above microwave: two half-width upper cabinets
       { id: "W2-MICRO-UPPER-L", label: "Above Microwave Left", zones: ["Main"] },
       { id: "W2-MICRO-UPPER-R", label: "Above Microwave Right", zones: ["Main"] },
-      // Three base cabinets to right of stove (18"W × 31"D)
-      { id: "W2-BASE-R1", label: "Base Right 1", zones: ["Main"] },
-      { id: "W2-BASE-R2", label: "Base Right 2", zones: ["Main"] },
-      { id: "W2-BASE-R3", label: "Base Right 3", zones: ["Main"] },
-      // Two upper cabinets above those
+      // Two upper cabinets above sink area
       { id: "W2-UPPER-R1", label: "Upper Right 1", zones: ["Shelf 1", "Shelf 2"] },
       { id: "W2-UPPER-R2", label: "Upper Right 2", zones: ["Shelf 1", "Shelf 2"] },
     ]
