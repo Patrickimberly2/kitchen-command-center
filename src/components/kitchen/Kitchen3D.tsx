@@ -44,10 +44,10 @@ const UNIT_POSITIONS: Record<string, { pos: [number, number, number]; size: [num
   "W2-UPPER-R1": { pos: [1, 4.5, 5.5], size: [1.25, 2.5, 1], type: 'cabinet', handleDir: 'back' },
   "W2-UPPER-R2": { pos: [2.5, 4.5, 5.5], size: [1.25, 2.5, 1], type: 'cabinet', handleDir: 'back' },
 
-  // PENINSULA 1 - perpendicular off right end of Wall 2
-  "PEN1-BASE-1": { pos: [3.2, 1.25, 3.4], size: [1.25, 2.5, 2.6], type: 'cabinet', handleDir: 'left' },
-  "PEN1-BASE-2": { pos: [3.2, 1.25, 1.6], size: [1.5, 2.5, 2.6], type: 'cabinet', handleDir: 'left' },
-  "PEN1-BASE-3": { pos: [3.2, 1.25, -0.2], size: [1.5, 2.5, 2.6], type: 'cabinet', handleDir: 'left' },
+  // PENINSULA 1 - perpendicular off right end of Wall 2, 18" deep (1.5 units), connected
+  "PEN1-BASE-1": { pos: [3.2, 1.25, 3.45], size: [1.25, 2.5, 1.5], type: 'cabinet', handleDir: 'left' },
+  "PEN1-BASE-2": { pos: [3.2, 1.25, 1.95], size: [1.25, 2.5, 1.5], type: 'cabinet', handleDir: 'left' },
+  "PEN1-BASE-3": { pos: [3.2, 1.25, 0.45], size: [1.25, 2.5, 1.5], type: 'cabinet', handleDir: 'left' },
   // 3 stacked drawers at left angle from PEN1-BASE-3
   "PEN1-DRAWER-1": { pos: [1.5, 1.25, -0.2], size: [1.25, 2.5, 2.6], type: 'drawer', handleDir: 'front' },
   "PEN1-DRAWER-2": { pos: [0.1, 1.25, -0.2], size: [1.25, 2.5, 2.6], type: 'drawer', handleDir: 'front' },
@@ -58,11 +58,10 @@ const UNIT_POSITIONS: Record<string, { pos: [number, number, number]; size: [num
   "PEN1-UPPER-3": { pos: [3.2, 4.5, 0.6], size: [1.25, 2.5, 1], type: 'cabinet', handleDir: 'left' },
   "PEN1-UPPER-4": { pos: [3.2, 4.5, -0.8], size: [1.25, 2.5, 1], type: 'cabinet', handleDir: 'left' },
 
-  // PENINSULA 2 - Display Peninsula: positioned to left of W2-BASE-L3
-  // PEN2 cabinets ~18" deep (1.5 units) for walkway clearance
+  // PENINSULA 2 - Display Peninsula: 18" deep (1.5 units), connected
   "PEN2-BASE-1": { pos: [-10.8, 1.25, 3.45], size: [1.25, 2.5, 1.5], type: 'cabinet', handleDir: 'right' },
-  "PEN2-BASE-2": { pos: [-10.8, 1.25, 1.45], size: [1.25, 2.5, 1.5], type: 'cabinet', handleDir: 'right' },
-  "PEN2-BASE-3": { pos: [-10.8, 1.25, -0.55], size: [1.25, 2.5, 1.5], type: 'cabinet', handleDir: 'right' },
+  "PEN2-BASE-2": { pos: [-10.8, 1.25, 1.95], size: [1.25, 2.5, 1.5], type: 'cabinet', handleDir: 'right' },
+  "PEN2-BASE-3": { pos: [-10.8, 1.25, 0.45], size: [1.25, 2.5, 1.5], type: 'cabinet', handleDir: 'right' },
 
   // ISLAND - Detached, centered between the two walls
   "ISL-1": { pos: [-3, 1.25, 0], size: [1.25, 2.5, 2.6], type: 'cabinet' },
@@ -306,15 +305,16 @@ function Countertops() {
         <boxGeometry args={[12.75, 0.08, 2.8]} />
         <meshStandardMaterial color={COLORS.countertop} roughness={0.4} />
       </mesh>
-      {/* Peninsula 1 countertop - covers PEN1-BASE-1 to PEN1-BASE-3 */}
-      <mesh position={[3.2, 2.55, 1.6]}>
-        <boxGeometry args={[2, 0.08, 6]} />
+      {/* Peninsula 1 countertop - covers PEN1-BASE-1 to PEN1-BASE-3 (18" deep, connected) */}
+      {/* From z = 3.45 + 0.75 = 4.2 to z = 0.45 - 0.75 = -0.3, center z = 1.95, length = 4.5 */}
+      <mesh position={[3.2, 2.55, 1.95]}>
+        <boxGeometry args={[1.45, 0.08, 4.5]} />
         <meshStandardMaterial color={COLORS.countertop} roughness={0.4} />
       </mesh>
-      {/* Peninsula 2 countertop - covers PEN2-BASE-1 to PEN2-BASE-3 */}
-      {/* From z = 3.45 + 0.75 = 4.2 to z = -0.55 - 0.75 = -1.3, center z = 1.45, length = 5.5 */}
-      <mesh position={[-10.8, 2.55, 1.45]}>
-        <boxGeometry args={[1.45, 0.08, 5.5]} />
+      {/* Peninsula 2 countertop - covers PEN2-BASE-1 to PEN2-BASE-3 (18" deep, connected) */}
+      {/* From z = 3.45 + 0.75 = 4.2 to z = 0.45 - 0.75 = -0.3, center z = 1.95, length = 4.5 */}
+      <mesh position={[-10.8, 2.55, 1.95]}>
+        <boxGeometry args={[1.45, 0.08, 4.5]} />
         <meshStandardMaterial color={COLORS.countertop} roughness={0.4} />
       </mesh>
       {/* Island countertop */}
