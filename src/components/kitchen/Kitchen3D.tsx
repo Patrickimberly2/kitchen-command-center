@@ -1,8 +1,9 @@
 import React, { useState } from "react";
-import { Canvas } from "@react-three/fiber";
+import { Canvas, ThreeEvent } from "@react-three/fiber";
 import { OrbitControls, RoundedBox, Html } from "@react-three/drei";
 import { kitchenLayout } from "@/data/kitchenLayout";
 
+// Unit position mapping - authoritative positions for each unit ID
 const UNIT_POSITIONS: Record<
   string,
   {
@@ -22,262 +23,72 @@ const UNIT_POSITIONS: Record<
     handleDir?: "front" | "back" | "left" | "right";
   }
 > = {
-  // WALL-1: Fridge & Pantry Wall
+  // WALL-1: Fridge & Pantry Wall - Shifted W1 cabinets to not be behind fridge
   FREEZER: { pos: [-10, 2.75, -5.5], size: [2.6, 5.5, 2.5], type: "freezer" },
   PANTRY: { pos: [-7, 3, -5.5], size: [2.5, 6, 2.7], type: "pantry" },
   FRIDGE: { pos: [-4, 2.75, -5.5], size: [3, 5.5, 2.7], type: "fridge" },
-  "FRIDGE-UPPER-L": {
-    pos: [-4.75, 6, -5.5],
-    size: [1.25, 1.25, 1],
-    type: "cabinet",
-  },
-  "FRIDGE-UPPER-R": {
-    pos: [-3.25, 6, -5.5],
-    size: [1.25, 1.25, 1],
-    type: "cabinet",
-  },
+  "FRIDGE-UPPER-L": { pos: [-4.75, 6, -5.5], size: [1.25, 1.25, 1], type: "cabinet" },
+  "FRIDGE-UPPER-R": { pos: [-3.25, 6, -5.5], size: [1.25, 1.25, 1], type: "cabinet" },
 
-  "W1-BASE-1": {
-    pos: [-1.5, 1.25, -5.5],
-    size: [1.35, 2.5, 2.6],
-    type: "base-drawer",
-  },
-  "W1-BASE-2": {
-    pos: [-0.15, 1.25, -5.5],
-    size: [1.35, 2.5, 2.6],
-    type: "base-drawer",
-  },
-  "W1-BASE-3": {
-    pos: [1.2, 1.25, -5.5],
-    size: [1.35, 2.5, 2.6],
-    type: "base-drawer",
-  },
-  "W1-BASE-4": {
-    pos: [2.55, 1.25, -5.5],
-    size: [1.35, 2.5, 2.6],
-    type: "base-drawer",
-  },
-  "W1-BASE-5": {
-    pos: [3.9, 1.25, -5.5],
-    size: [1.35, 2.5, 2.6],
-    type: "base-drawer",
-  },
+  // Wall 1 base cabinets - shifted right, starting after fridge, continuous run
+  "W1-BASE-1": { pos: [-1.5, 1.25, -5.5], size: [1.35, 2.5, 2.6], type: "base-drawer" },
+  "W1-BASE-2": { pos: [-0.15, 1.25, -5.5], size: [1.35, 2.5, 2.6], type: "base-drawer" },
+  "W1-BASE-3": { pos: [1.2, 1.25, -5.5], size: [1.35, 2.5, 2.6], type: "base-drawer" },
+  "W1-BASE-4": { pos: [2.55, 1.25, -5.5], size: [1.35, 2.5, 2.6], type: "base-drawer" },
+  "W1-BASE-5": { pos: [3.9, 1.25, -5.5], size: [1.35, 2.5, 2.6], type: "base-drawer" },
 
-  "W1-UPPER-1": {
-    pos: [-1.5, 4.5, -5.5],
-    size: [1.35, 2.5, 1],
-    type: "upper-split",
-  },
-  "W1-UPPER-2": {
-    pos: [-0.15, 4.5, -5.5],
-    size: [1.35, 2.5, 1],
-    type: "upper-split",
-  },
-  "W1-UPPER-3": {
-    pos: [1.2, 4.5, -5.5],
-    size: [1.35, 2.5, 1],
-    type: "upper-split",
-  },
-  "W1-UPPER-4": {
-    pos: [2.55, 4.5, -5.5],
-    size: [1.35, 2.5, 1],
-    type: "upper-split",
-  },
-  "W1-UPPER-5": {
-    pos: [3.9, 4.5, -5.5],
-    size: [1.35, 2.5, 1],
-    type: "upper-split",
-  },
+  // Wall 1 upper cabinets - aligned with bases, connected runs (1-3 together, 4-5 together)
+  "W1-UPPER-1": { pos: [-1.5, 4.5, -5.5], size: [1.35, 2.5, 1], type: "upper-split" },
+  "W1-UPPER-2": { pos: [-0.15, 4.5, -5.5], size: [1.35, 2.5, 1], type: "upper-split" },
+  "W1-UPPER-3": { pos: [1.2, 4.5, -5.5], size: [1.35, 2.5, 1], type: "upper-split" },
+  "W1-UPPER-4": { pos: [2.55, 4.5, -5.5], size: [1.35, 2.5, 1], type: "upper-split" },
+  "W1-UPPER-5": { pos: [3.9, 4.5, -5.5], size: [1.35, 2.5, 1], type: "upper-split" },
 
   // WALL-2: Sink & Stove Wall
-  "W2-UPPER-L1": {
-    pos: [-10, 4.5, 5.5],
-    size: [1, 2.5, 1],
-    type: "upper-split",
-    handleDir: "back",
-  },
-  "W2-UPPER-L2": {
-    pos: [-8.65, 4.5, 5.5],
-    size: [1, 2.5, 1],
-    type: "upper-split",
-    handleDir: "back",
-  },
-  "W2-DRAWERS": {
-    pos: [1.95, 1.25, 5.5],
-    size: [1.25, 2.5, 2.6],
-    type: "drawer",
-    handleDir: "back",
-  },
-  "W2-BASE-L1": {
-    pos: [-6.425, 1.25, 5.5],
-    size: [1.5, 2.5, 2.6],
-    type: "base-drawer",
-    handleDir: "back",
-  },
-  "W2-BASE-L2": {
-    pos: [-7.925, 1.25, 5.5],
-    size: [1.5, 2.5, 2.6],
-    type: "base-drawer",
-    handleDir: "back",
-  },
-  "W2-BASE-L3": {
-    pos: [-9.425, 1.25, 5.5],
-    size: [1.5, 2.5, 2.6],
-    type: "base-drawer",
-    handleDir: "back",
-  },
-  DISHWASHER: {
-    pos: [-2.175, 1.25, 5.5],
-    size: [2, 2.5, 2.6],
-    type: "appliance",
-    handleDir: "back",
-  },
-  "W2-DW-UPPER-1": {
-    pos: [-2.675, 4.5, 5.5],
-    size: [1, 2.5, 1],
-    type: "upper-split",
-    handleDir: "back",
-  },
-  "W2-DW-UPPER-2": {
-    pos: [-1.675, 4.5, 5.5],
-    size: [1, 2.5, 1],
-    type: "upper-split",
-    handleDir: "back",
-  },
+  "W2-UPPER-L1": { pos: [-10, 4.5, 5.5], size: [1, 2.5, 1], type: "upper-split", handleDir: "back" },
+  "W2-UPPER-L2": { pos: [-8.65, 4.5, 5.5], size: [1, 2.5, 1], type: "upper-split", handleDir: "back" },
+  "W2-DRAWERS": { pos: [1.95, 1.25, 5.5], size: [1.25, 2.5, 2.6], type: "drawer", handleDir: "back" },
+  "W2-BASE-L1": { pos: [-6.425, 1.25, 5.5], size: [1.5, 2.5, 2.6], type: "base-drawer", handleDir: "back" },
+  "W2-BASE-L2": { pos: [-7.925, 1.25, 5.5], size: [1.5, 2.5, 2.6], type: "base-drawer", handleDir: "back" },
+  "W2-BASE-L3": { pos: [-9.425, 1.25, 5.5], size: [1.5, 2.5, 2.6], type: "base-drawer", handleDir: "back" },
+  DISHWASHER: { pos: [-2.175, 1.25, 5.5], size: [2, 2.5, 2.6], type: "appliance", handleDir: "back" },
+  "W2-DW-UPPER-1": { pos: [-2.675, 4.5, 5.5], size: [1, 2.5, 1], type: "upper-split", handleDir: "back" },
+  "W2-DW-UPPER-2": { pos: [-1.675, 4.5, 5.5], size: [1, 2.5, 1], type: "upper-split", handleDir: "back" },
   STOVE: { pos: [-4.425, 2.6, 5.5], size: [2.5, 0.15, 2.6], type: "appliance" },
-  "W2-MICRO-UPPER-L": {
-    pos: [-5.1, 5.5, 5.5],
-    size: [1.2, 1.5, 1],
-    type: "cabinet",
-    handleDir: "back",
-  },
-  "W2-MICRO-UPPER-R": {
-    pos: [-3.9, 5.5, 5.5],
-    size: [1.2, 1.5, 1],
-    type: "cabinet",
-    handleDir: "back",
-  },
-  SINK: {
-    pos: [0.075, 1.25, 5.5],
-    size: [2.5, 2.5, 2.6],
-    type: "sink-cabinet",
-    handleDir: "back",
-  },
-  "W2-BASE-R1": {
-    pos: [1.45, 1.25, 5.5],
-    size: [1.25, 2.5, 2.6],
-    type: "base-drawer",
-    handleDir: "back",
-  },
-  "W2-UPPER-R1": {
-    pos: [-0.5, 4.5, 5.5],
-    size: [1.25, 2.5, 1],
-    type: "upper-split",
-    handleDir: "back",
-  },
-  "W2-UPPER-R2": {
-    pos: [0.75, 4.5, 5.5],
-    size: [1.25, 2.5, 1],
-    type: "upper-split",
-    handleDir: "back",
-  },
+  "W2-MICRO-UPPER-L": { pos: [-5.1, 5.5, 5.5], size: [1.2, 1.5, 1], type: "cabinet", handleDir: "back" },
+  "W2-MICRO-UPPER-R": { pos: [-3.9, 5.5, 5.5], size: [1.2, 1.5, 1], type: "cabinet", handleDir: "back" },
+  SINK: { pos: [0.075, 1.25, 5.5], size: [2.5, 2.5, 2.6], type: "sink-cabinet", handleDir: "back" },
+  "W2-BASE-R1": { pos: [1.45, 1.25, 5.5], size: [1.25, 2.5, 2.6], type: "base-drawer", handleDir: "back" },
+  "W2-UPPER-R1": { pos: [-0.5, 4.5, 5.5], size: [1.25, 2.5, 1], type: "upper-split", handleDir: "back" },
+  "W2-UPPER-R2": { pos: [0.75, 4.5, 5.5], size: [1.25, 2.5, 1], type: "upper-split", handleDir: "back" },
 
-  // PENINSULA 1 – bases face left; uppers now match bases and form a side‑connected row
-  "PEN1-BASE-1": {
-    pos: [3.2, 1.25, 3.45],
-    size: [1.25, 2.5, 1.5],
-    type: "base-drawer",
-    handleDir: "left",
-  },
-  "PEN1-BASE-2": {
-    pos: [3.2, 1.25, 1.95],
-    size: [1.25, 2.5, 1.5],
-    type: "base-drawer",
-    handleDir: "left",
-  },
-  "PEN1-BASE-3": {
-    pos: [3.2, 1.25, 0.45],
-    size: [1.25, 2.5, 1.5],
-    type: "base-drawer",
-    handleDir: "left",
-  },
+  // PENINSULA 1 - bases front–back, uppers in a side‑by‑side run facing left
+  "PEN1-BASE-1": { pos: [3.2, 1.25, 3.45], size: [1.25, 2.5, 1.5], type: "base-drawer", handleDir: "left" },
+  "PEN1-BASE-2": { pos: [3.2, 1.25, 1.95], size: [1.25, 2.5, 1.5], type: "base-drawer", handleDir: "left" },
+  "PEN1-BASE-3": { pos: [3.2, 1.25, 0.45], size: [1.25, 2.5, 1.5], type: "base-drawer", handleDir: "left" },
 
-  // Uppers share same z as center base; x steps so sides touch; handles to the left
-  "PEN1-UPPER-1": {
-    pos: [1.7, 4.5, 1.95],
-    size: [1.25, 2.5, 1],
-    type: "upper-split",
-    handleDir: "left",
-  },
-  "PEN1-UPPER-2": {
-    pos: [2.95, 4.5, 1.95],
-    size: [1.25, 2.5, 1],
-    type: "upper-split",
-    handleDir: "left",
-  },
-  "PEN1-UPPER-3": {
-    pos: [4.2, 4.5, 1.95],
-    size: [1.25, 2.5, 1],
-    type: "upper-split",
-    handleDir: "left",
-  },
-  "PEN1-UPPER-4": {
-    pos: [5.45, 4.5, 1.95],
-    size: [1.25, 2.5, 1],
-    type: "upper-split",
-    handleDir: "left",
-  },
+  // all uppers same z as center base (1.95), same y; x steps so sides touch
+  "PEN1-UPPER-1": { pos: [1.7, 4.5, 1.95], size: [1.25, 2.5, 1], type: "upper-split", handleDir: "left" },
+  "PEN1-UPPER-2": { pos: [2.95, 4.5, 1.95], size: [1.25, 2.5, 1], type: "upper-split", handleDir: "left" },
+  "PEN1-UPPER-3": { pos: [4.2, 4.5, 1.95], size: [1.25, 2.5, 1], type: "upper-split", handleDir: "left" },
+  "PEN1-UPPER-4": { pos: [5.45, 4.5, 1.95], size: [1.25, 2.5, 1], type: "upper-split", handleDir: "left" },
 
-  // PENINSULA 2 – bases face right; uppers now match
-  "PEN2-BASE-1": {
-    pos: [-10.8, 1.25, 3.45],
-    size: [1.25, 2.5, 1.5],
-    type: "base-drawer",
-    handleDir: "right",
-  },
-  "PEN2-BASE-2": {
-    pos: [-10.8, 1.25, 1.95],
-    size: [1.25, 2.5, 1.5],
-    type: "base-drawer",
-    handleDir: "right",
-  },
-  "PEN2-BASE-3": {
-    pos: [-10.8, 1.25, 0.45],
-    size: [1.25, 2.5, 1.5],
-    type: "base-drawer",
-    handleDir: "right",
-  },
+  // PENINSULA 2 - bases front–back, uppers in a side‑by‑side run facing right
+  "PEN2-BASE-1": { pos: [-10.8, 1.25, 3.45], size: [1.25, 2.5, 1.5], type: "base-drawer", handleDir: "right" },
+  "PEN2-BASE-2": { pos: [-10.8, 1.25, 1.95], size: [1.25, 2.5, 1.5], type: "base-drawer", handleDir: "right" },
+  "PEN2-BASE-3": { pos: [-10.8, 1.25, 0.45], size: [1.25, 2.5, 1.5], type: "base-drawer", handleDir: "right" },
 
-  "PEN2-UPPER-1": {
-    pos: [-12.3, 4.5, 1.95],
-    size: [1.25, 2.5, 1],
-    type: "glass",
-    handleDir: "right",
-  },
-  "PEN2-UPPER-2": {
-    pos: [-11.05, 4.5, 1.95],
-    size: [1.25, 2.5, 1],
-    type: "glass",
-    handleDir: "right",
-  },
-  "PEN2-UPPER-3": {
-    pos: [-9.8, 4.5, 1.95],
-    size: [1.25, 2.5, 1],
-    type: "glass",
-    handleDir: "right",
-  },
-  "PEN2-UPPER-4": {
-    pos: [-8.55, 4.5, 1.95],
-    size: [1.25, 2.5, 1],
-    type: "glass",
-    handleDir: "right",
-  },
+  "PEN2-UPPER-1": { pos: [-12.3, 4.5, 1.95], size: [1.25, 2.5, 1], type: "glass", handleDir: "right" },
+  "PEN2-UPPER-2": { pos: [-11.05, 4.5, 1.95], size: [1.25, 2.5, 1], type: "glass", handleDir: "right" },
+  "PEN2-UPPER-3": { pos: [-9.8, 4.5, 1.95], size: [1.25, 2.5, 1], type: "glass", handleDir: "right" },
+  "PEN2-UPPER-4": { pos: [-8.55, 4.5, 1.95], size: [1.25, 2.5, 1], type: "glass", handleDir: "right" },
 
-  // ISLAND
+  // ISLAND - connected block
   "ISL-1": { pos: [-2.625, 1.25, 0], size: [1.25, 2.5, 2.6], type: "cabinet" },
   "ISL-2": { pos: [-1.375, 1.25, 0], size: [1.25, 2.5, 2.6], type: "cabinet" },
 };
 
+// Color palette
 const COLORS = {
   woodDark: "#8b4513",
   woodMedium: "#a0522d",
@@ -288,6 +99,7 @@ const COLORS = {
   stainless: "#a0a0a0",
 };
 
+// Get color based on unit type and ID
 function getUnitColor(unitId: string, type: string): string {
   if (type === "appliance") {
     if (unitId === "FREEZER" || unitId === "FRIDGE") return COLORS.applianceBlack;
@@ -338,7 +150,11 @@ function ZoneMesh({ zoneId, position, size, color, isSelected, onClick, label }:
       </RoundedBox>
       {(isSelected || hovered) && (
         <Html position={[0, size[1] / 2 + 0.15, 0]} center distanceFactor={10} style={{ pointerEvents: "none" }}>
-          <div className="rounded px-1 py-0.5 text-[8px] font-medium whitespace-nowrap bg-card/80 text-foreground border border-border">
+          <div
+            className={`rounded px-1 py-0.5 text-[8px] font-medium whitespace-nowrap ${
+              isSelected ? "bg-primary text-primary-foreground" : "bg-accent text-accent-foreground"
+            }`}
+          >
             {label}
           </div>
         </Html>
@@ -358,11 +174,13 @@ interface UnitMeshProps {
 function UnitMesh({ unitId, label, zones, selectedZoneId, onClick }: UnitMeshProps) {
   const [hovered, setHovered] = useState(false);
   const config = UNIT_POSITIONS[unitId];
+
   if (!config) return null;
 
   const { pos, size, type, handleDir = "front" } = config;
   const color = getUnitColor(unitId, type);
 
+  // Helper to get handle rotation
   const handleRotation =
     handleDir === "left" || handleDir === "right"
       ? ([0, Math.PI / 2, 0] as [number, number, number])
@@ -381,11 +199,12 @@ function UnitMesh({ unitId, label, zones, selectedZoneId, onClick }: UnitMeshPro
     }
   };
 
-  // Freezer
+  // Freezer: 5 zones stacked vertically (4 shelves + 1 bin)
   if (type === "freezer") {
     const zoneHeight = size[1] / 5;
     return (
       <group position={pos}>
+        {/* Outer shell */}
         <RoundedBox args={[size[0], size[1], size[2]]} radius={0.03} smoothness={4}>
           <meshStandardMaterial
             color={COLORS.applianceWhite}
@@ -395,6 +214,7 @@ function UnitMesh({ unitId, label, zones, selectedZoneId, onClick }: UnitMeshPro
             opacity={0.3}
           />
         </RoundedBox>
+        {/* 5 clickable zones */}
         {zones.map((zone, i) => (
           <ZoneMesh
             key={zone}
@@ -416,7 +236,7 @@ function UnitMesh({ unitId, label, zones, selectedZoneId, onClick }: UnitMeshPro
     );
   }
 
-  // Pantry
+  // Pantry: 8 shelf zones stacked vertically
   if (type === "pantry") {
     const zoneHeight = size[1] / 8;
     return (
@@ -451,10 +271,15 @@ function UnitMesh({ unitId, label, zones, selectedZoneId, onClick }: UnitMeshPro
     );
   }
 
-  // Fridge
+  // Fridge: interior zones + door bins (left and right doors)
   if (type === "fridge") {
+    const interiorZones = zones.filter((z) => !z.includes("Door"));
+    const leftDoorZones = zones.filter((z) => z.includes("LeftDoor"));
+    const rightDoorZones = zones.filter((z) => z.includes("RightDoor"));
+
     return (
       <group position={pos}>
+        {/* Main body */}
         <RoundedBox args={[size[0], size[1], size[2]]} radius={0.03} smoothness={4}>
           <meshStandardMaterial
             color={COLORS.applianceBlack}
@@ -464,6 +289,9 @@ function UnitMesh({ unitId, label, zones, selectedZoneId, onClick }: UnitMeshPro
             opacity={0.4}
           />
         </RoundedBox>
+
+        {/* Interior zones */}
+        {/* Top shelf left */}
         <ZoneMesh
           zoneId="FridgeTopShelfLeft"
           position={[-size[0] / 4, size[1] / 2 - 0.6, 0]}
@@ -473,6 +301,7 @@ function UnitMesh({ unitId, label, zones, selectedZoneId, onClick }: UnitMeshPro
           onClick={onClick}
           label="Top Left"
         />
+        {/* Top shelf right */}
         <ZoneMesh
           zoneId="FridgeTopShelfRight"
           position={[size[0] / 4, size[1] / 2 - 0.6, 0]}
@@ -482,6 +311,7 @@ function UnitMesh({ unitId, label, zones, selectedZoneId, onClick }: UnitMeshPro
           onClick={onClick}
           label="Top Right"
         />
+        {/* Middle shelf */}
         <ZoneMesh
           zoneId="FridgeMiddleShelf"
           position={[0, size[1] / 2 - 1.8, 0]}
@@ -491,6 +321,7 @@ function UnitMesh({ unitId, label, zones, selectedZoneId, onClick }: UnitMeshPro
           onClick={onClick}
           label="Middle"
         />
+        {/* Bottom shelf */}
         <ZoneMesh
           zoneId="FridgeBottomShelf"
           position={[0, size[1] / 2 - 3, 0]}
@@ -500,6 +331,7 @@ function UnitMesh({ unitId, label, zones, selectedZoneId, onClick }: UnitMeshPro
           onClick={onClick}
           label="Bottom"
         />
+        {/* Crispers */}
         <ZoneMesh
           zoneId="CrisperLeft"
           position={[-size[0] / 4, size[1] / 2 - 4.2, 0]}
@@ -518,6 +350,8 @@ function UnitMesh({ unitId, label, zones, selectedZoneId, onClick }: UnitMeshPro
           onClick={onClick}
           label="Crisper R"
         />
+
+        {/* Left door bins */}
         <ZoneMesh
           zoneId="FridgeLeftDoorTop"
           position={[-size[0] / 2 + 0.2, size[1] / 2 - 0.8, size[2] / 2 + 0.1]}
@@ -545,6 +379,8 @@ function UnitMesh({ unitId, label, zones, selectedZoneId, onClick }: UnitMeshPro
           onClick={onClick}
           label="L Door Bot"
         />
+
+        {/* Right door bins */}
         <ZoneMesh
           zoneId="FridgeRightDoorTop"
           position={[size[0] / 2 - 0.2, size[1] / 2 - 0.8, size[2] / 2 + 0.1]}
@@ -572,6 +408,7 @@ function UnitMesh({ unitId, label, zones, selectedZoneId, onClick }: UnitMeshPro
           onClick={onClick}
           label="R Door Bot"
         />
+
         <Html position={[0, size[1] / 2 + 0.3, 0]} center distanceFactor={10} style={{ pointerEvents: "none" }}>
           <div className="rounded px-1.5 py-0.5 text-[10px] font-medium whitespace-nowrap bg-card/80 text-foreground border border-border">
             {label}
@@ -581,7 +418,7 @@ function UnitMesh({ unitId, label, zones, selectedZoneId, onClick }: UnitMeshPro
     );
   }
 
-  // Drawer stack
+  // Drawer unit (W2-DRAWERS): 3 stacked drawers, each clickable
   if (type === "drawer") {
     const drawerHeight = size[1] / 3;
     return (
@@ -607,7 +444,7 @@ function UnitMesh({ unitId, label, zones, selectedZoneId, onClick }: UnitMeshPro
     );
   }
 
-  // Base cabinet with drawer + door
+  // Base cabinet with drawer zone above door zone
   if (type === "base-drawer") {
     const drawerZone = zones.find((z) => z.includes("Drawer"));
     const doorZone = zones.find((z) => z.includes("Door"));
@@ -616,6 +453,7 @@ function UnitMesh({ unitId, label, zones, selectedZoneId, onClick }: UnitMeshPro
 
     return (
       <group position={pos}>
+        {/* Drawer zone (top) */}
         {drawerZone && (
           <ZoneMesh
             zoneId={drawerZone}
@@ -627,6 +465,7 @@ function UnitMesh({ unitId, label, zones, selectedZoneId, onClick }: UnitMeshPro
             label="Drawer"
           />
         )}
+        {/* Door zone (bottom) */}
         {doorZone && (
           <ZoneMesh
             zoneId={doorZone}
@@ -638,21 +477,23 @@ function UnitMesh({ unitId, label, zones, selectedZoneId, onClick }: UnitMeshPro
             label="Door"
           />
         )}
+        {/* Handle on drawer */}
         <mesh
-          position={
-            [...getHandleOffset().map((v, i) => (i === 1 ? size[1] / 2 - drawerHeight / 2 : v))] as [
+          position={[
+            ...(getHandleOffset().map((v, i) => (i === 1 ? size[1] / 2 - drawerHeight / 2 : v)) as [
               number,
               number,
               number,
-            ]
-          }
+            ]),
+          ]}
           rotation={handleRotation}
         >
           <boxGeometry args={[size[0] * 0.3, 0.04, 0.02]} />
           <meshStandardMaterial color="#78716c" metalness={0.8} roughness={0.2} />
         </mesh>
+        {/* Handle on door */}
         <mesh
-          position={[...getHandleOffset().map((v, i) => (i === 1 ? 0 : v))] as [number, number, number]}
+          position={[...(getHandleOffset().map((v, i) => (i === 1 ? 0 : v)) as [number, number, number])]}
           rotation={handleRotation}
         >
           <boxGeometry args={[size[0] * 0.15, 0.04, 0.02]} />
@@ -667,7 +508,7 @@ function UnitMesh({ unitId, label, zones, selectedZoneId, onClick }: UnitMeshPro
     );
   }
 
-  // Upper cabinet split into top/bottom
+  // Upper cabinet split into top/bottom zones
   if (type === "upper-split") {
     const topZone = zones.find((z) => z.includes("Top"));
     const bottomZone = zones.find((z) => z.includes("Bottom"));
@@ -710,7 +551,7 @@ function UnitMesh({ unitId, label, zones, selectedZoneId, onClick }: UnitMeshPro
     );
   }
 
-  // Sink cabinet
+  // Sink cabinet with 2 doors
   if (type === "sink-cabinet") {
     const leftDoor = zones.find((z) => z.includes("Left"));
     const rightDoor = zones.find((z) => z.includes("Right"));
@@ -749,7 +590,7 @@ function UnitMesh({ unitId, label, zones, selectedZoneId, onClick }: UnitMeshPro
     );
   }
 
-  // Stove
+  // Stove special rendering
   if (unitId === "STOVE") {
     return (
       <group position={pos}>
@@ -783,7 +624,7 @@ function UnitMesh({ unitId, label, zones, selectedZoneId, onClick }: UnitMeshPro
     );
   }
 
-  // Glass cabinets (PEN2 uppers)
+  // Glass cabinet (PEN2 uppers)
   if (type === "glass") {
     const topZone = zones.find((z) => z.includes("Top"));
     const bottomZone = zones.find((z) => z.includes("Bottom"));
@@ -794,6 +635,7 @@ function UnitMesh({ unitId, label, zones, selectedZoneId, onClick }: UnitMeshPro
         <RoundedBox args={size} radius={0.02} smoothness={4}>
           <meshStandardMaterial color="#d4b896" roughness={0.5} metalness={0.05} transparent opacity={0.3} />
         </RoundedBox>
+        {/* Glass panel */}
         <mesh position={[0, 0, size[2] * 0.35]}>
           <boxGeometry args={[size[0] * 0.8, size[1] * 0.85, 0.02]} />
           <meshStandardMaterial color="#b8d4e8" transparent opacity={0.25} roughness={0.05} />
@@ -829,7 +671,7 @@ function UnitMesh({ unitId, label, zones, selectedZoneId, onClick }: UnitMeshPro
     );
   }
 
-  // Simple cabinet/appliance with a single Main zone
+  // Regular cabinet/appliance (simple units with Main zone)
   const isAppliance = type === "appliance";
   const isSelected = zones.some((z) => selectedZoneId === z) || selectedZoneId === zones[0];
 
@@ -890,6 +732,7 @@ function Floor() {
 function Walls() {
   return (
     <>
+      {/* Wall 1 - Back (Fridge/Pantry wall) */}
       <mesh position={[-2, 4, -6.5]}>
         <boxGeometry args={[18, 8, 0.2]} />
         <meshStandardMaterial color="#ffffff" roughness={0.9} />
@@ -898,6 +741,7 @@ function Walls() {
         <boxGeometry args={[18, 0.3, 0.25]} />
         <meshStandardMaterial color="#4a5568" roughness={0.8} />
       </mesh>
+      {/* Wall 2 - Front (Sink/Stove wall, parallel to Wall 1) */}
       <mesh position={[-2, 4, 6.5]}>
         <boxGeometry args={[18, 8, 0.2]} />
         <meshStandardMaterial color="#ffffff" roughness={0.9} />
@@ -913,22 +757,27 @@ function Walls() {
 function Countertops() {
   return (
     <>
+      {/* Wall 1 countertop - continuous run over W1-BASE-1 to W1-BASE-5 */}
       <mesh position={[1.2, 2.55, -5.5]}>
         <boxGeometry args={[7, 0.08, 2.8]} />
         <meshStandardMaterial color={COLORS.countertop} roughness={0.4} />
       </mesh>
+      {/* Wall 2 countertop */}
       <mesh position={[-3.8, 2.55, 5.5]}>
         <boxGeometry args={[12.75, 0.08, 2.8]} />
         <meshStandardMaterial color={COLORS.countertop} roughness={0.4} />
       </mesh>
+      {/* Peninsula 1 countertop */}
       <mesh position={[3.2, 2.55, 1.95]}>
         <boxGeometry args={[1.45, 0.08, 4.5]} />
         <meshStandardMaterial color={COLORS.countertop} roughness={0.4} />
       </mesh>
+      {/* Peninsula 2 countertop */}
       <mesh position={[-10.8, 2.55, 1.95]}>
         <boxGeometry args={[1.45, 0.08, 4.5]} />
         <meshStandardMaterial color={COLORS.countertop} roughness={0.4} />
       </mesh>
+      {/* Island countertop - connected block */}
       <mesh position={[-2, 2.55, 0]}>
         <boxGeometry args={[2.7, 0.08, 2.8]} />
         <meshStandardMaterial color={COLORS.countertop} roughness={0.4} />
@@ -961,6 +810,7 @@ interface Kitchen3DProps {
 }
 
 export default function Kitchen3D({ selectedUnitId, onSelectUnit }: Kitchen3DProps) {
+  // Collect all units from layout data
   const allUnits = kitchenLayout.flatMap((area) =>
     area.units.filter((unit) => unit.zones.length > 0 || unit.id === "STOVE"),
   );
@@ -980,6 +830,7 @@ export default function Kitchen3D({ selectedUnitId, onSelectUnit }: Kitchen3DPro
         <Microwave />
         <SinkBasin />
 
+        {/* Render all units with zone-based clicking */}
         {allUnits.map((unit) => (
           <UnitMesh
             key={unit.id}
