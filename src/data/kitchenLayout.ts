@@ -14,18 +14,20 @@ export interface Area {
   units: Unit[];
 }
 
-// Authoritative kitchen layout
+// ---------- AUTHORITATIVE KITCHEN LAYOUT ----------
+
 export const kitchenLayout: Area[] = [
   {
     areaId: "WALL-1",
     label: "Fridge & Pantry Wall",
     units: [
-      // Upright freezer: 5 clickable zones (4 shelves + 1 bottom bin)
+      // Upright freezer: 4 shelves + 1 bottom bin
       {
         id: "FREEZER",
         label: "Upright Freezer",
         zones: ["FreezerShelf1", "FreezerShelf2", "FreezerShelf3", "FreezerShelf4", "FreezerBottomBin"],
       },
+
       // Tall pantry: 8 shelf zones
       {
         id: "PANTRY",
@@ -41,7 +43,8 @@ export const kitchenLayout: Area[] = [
           "PantryShelf8",
         ],
       },
-      // Main fridge with interior zones, left door bins, right door bins
+
+      // Main fridge: interior shelves + crispers + door bins
       {
         id: "FRIDGE",
         label: "Main Fridge",
@@ -60,10 +63,12 @@ export const kitchenLayout: Area[] = [
           "FridgeRightDoorBottom",
         ],
       },
+
       // Above fridge: two separate cabinets
       { id: "FRIDGE-UPPER-L", label: "Above Fridge Left", zones: ["Main"] },
       { id: "FRIDGE-UPPER-R", label: "Above Fridge Right", zones: ["Main"] },
-      // Five upper cabinets - each split into 2 zones (top front / bottom front)
+
+      // Five uppers with inner shelf (top / bottom fronts)
       {
         id: "W1-UPPER-1",
         label: "Upper Cabinet 1",
@@ -89,7 +94,8 @@ export const kitchenLayout: Area[] = [
         label: "Upper Cabinet 5",
         zones: ["W1-UPPER-5-Top", "W1-UPPER-5-Bottom"],
       },
-      // Five base cabinets - each has drawer zone + door zone
+
+      // Five bases with drawer + door
       {
         id: "W1-BASE-1",
         label: "Base Cabinet 1",
@@ -117,11 +123,12 @@ export const kitchenLayout: Area[] = [
       },
     ],
   },
+
   {
     areaId: "WALL-2",
     label: "Sink & Stove Wall",
     units: [
-      // Two upper cabinets left - each split into 2 zones
+      // Left uppers – inner shelf
       {
         id: "W2-UPPER-L1",
         label: "Upper Left 1",
@@ -132,13 +139,15 @@ export const kitchenLayout: Area[] = [
         label: "Upper Left 2",
         zones: ["W2-UPPER-L2-Top", "W2-UPPER-L2-Bottom"],
       },
-      // 3-drawer stack - each drawer is its own clickable zone
+
+      // 3‑drawer stack
       {
         id: "W2-DRAWERS",
         label: "Drawer Stack",
         zones: ["W2-DRAWERS-Top", "W2-DRAWERS-Middle", "W2-DRAWERS-Bottom"],
       },
-      // Three base cabinets to left of stove - each has drawer + door zone
+
+      // Bases left of stove – drawer + door
       {
         id: "W2-BASE-L1",
         label: "Base Left 1",
@@ -154,11 +163,12 @@ export const kitchenLayout: Area[] = [
         label: "Base Left 3",
         zones: ["W2-BASE-L3-Drawer", "W2-BASE-L3-Door"],
       },
-      // Stove (appliance, no storage)
+
+      // Stove + dishwasher
       { id: "STOVE", label: "Stove", zones: [] },
-      // Built-in dishwasher
       { id: "DISHWASHER", label: "Dishwasher", zones: ["Main"] },
-      // Upper cabinets above dishwasher - 2 new uppers, each split into 2 zones
+
+      // Uppers above dishwasher – inner shelf
       {
         id: "W2-DW-UPPER-1",
         label: "Above Dishwasher 1",
@@ -169,13 +179,15 @@ export const kitchenLayout: Area[] = [
         label: "Above Dishwasher 2",
         zones: ["W2-DW-UPPER-2-Top", "W2-DW-UPPER-2-Bottom"],
       },
-      // Double-bowl sink with 2-door base cabinet - each door is separate
+
+      // Sink base – two doors
       {
         id: "SINK",
         label: "Sink Cabinet",
         zones: ["SINK-LeftDoor", "SINK-RightDoor"],
       },
-      // Above microwave: two half-width upper cabinets
+
+      // Above‑microwave uppers
       {
         id: "W2-MICRO-UPPER-L",
         label: "Above Microwave Left",
@@ -186,7 +198,8 @@ export const kitchenLayout: Area[] = [
         label: "Above Microwave Right",
         zones: ["Main"],
       },
-      // Two upper cabinets above sink area - each split into 2 zones
+
+      // Right uppers – inner shelf
       {
         id: "W2-UPPER-R1",
         label: "Upper Right 1",
@@ -197,7 +210,8 @@ export const kitchenLayout: Area[] = [
         label: "Upper Right 2",
         zones: ["W2-UPPER-R2-Top", "W2-UPPER-R2-Bottom"],
       },
-      // Base cabinet to right of sink - drawer + door zone
+
+      // Base right of sink
       {
         id: "W2-BASE-R1",
         label: "Base Right 1",
@@ -205,11 +219,12 @@ export const kitchenLayout: Area[] = [
       },
     ],
   },
+
   {
     areaId: "PEN-1",
     label: "Peninsula 1 – Bar Wall",
     units: [
-      // Three base cabinets - each has drawer + door zone
+      // Bases – drawer + door
       {
         id: "PEN1-BASE-1",
         label: "Peninsula 1 Cabinet 1",
@@ -225,7 +240,8 @@ export const kitchenLayout: Area[] = [
         label: "Peninsula 1 Cabinet 3",
         zones: ["PEN1-BASE-3-Drawer", "PEN1-BASE-3-Door"],
       },
-      // Four upper cabinets above PEN1 bases - each split into 2 zones
+
+      // Uppers above Peninsula 1 – inner shelf
       {
         id: "PEN1-UPPER-1",
         label: "PEN1 Upper 1",
@@ -248,11 +264,12 @@ export const kitchenLayout: Area[] = [
       },
     ],
   },
+
   {
     areaId: "PEN-2",
     label: "Peninsula 2 – Display Peninsula",
     units: [
-      // Three base cabinets - each has drawer + door zone
+      // Bases – drawer + door
       {
         id: "PEN2-BASE-1",
         label: "Peninsula 2 Cabinet 1",
@@ -268,7 +285,8 @@ export const kitchenLayout: Area[] = [
         label: "Peninsula 2 Cabinet 3",
         zones: ["PEN2-BASE-3-Drawer", "PEN2-BASE-3-Door"],
       },
-      // Four upper cabinets (double-sided doors) - each split into 2 zones
+
+      // Glass uppers – inner shelf
       {
         id: "PEN2-UPPER-1",
         label: "Display Cabinet 1",
@@ -291,90 +309,90 @@ export const kitchenLayout: Area[] = [
       },
     ],
   },
+
   {
     areaId: "ISLAND",
     label: "Island",
     units: [
-      // Two island cabinets forming one connected block
       { id: "ISL-1", label: "Island Cabinet 1", zones: ["Main"] },
       { id: "ISL-2", label: "Island Cabinet 2", zones: ["Main"] },
     ],
   },
 ];
 
-// Geometry constants for 3D rendering (in scene units, proportional to inches)
-// 1 scene unit = ~12 inches for easier calculation
+// ---------- GEOMETRY FOR 3D RENDERING ----------
+// 1 scene unit ≈ 12 inches
+
 export const GEOMETRY: Record<
   string,
   { width: number; depth: number; height: number; x?: number; y?: number; z?: number }
 > = {
-  // Wall 1 units
+  // WALL 1
   FREEZER: { width: 2.58, depth: 2.5, height: 5.5, x: -7, z: -5 },
   PANTRY: { width: 2.5, depth: 2.67, height: 6, x: -4.2, z: -5 },
   FRIDGE: { width: 3, depth: 2.67, height: 5.5, x: -1, z: -5 },
-  "FRIDGE-UPPER-L": {
-    width: 1.25,
-    depth: 1,
-    height: 1.25,
-    x: -1.75,
-    z: -5,
-    y: 5.8,
-  },
-  "FRIDGE-UPPER-R": {
-    width: 1.25,
-    depth: 1,
-    height: 1.25,
-    x: -0.25,
-    z: -5,
-    y: 5.8,
-  },
+  "FRIDGE-UPPER-L": { width: 1.25, depth: 1, height: 1.25, x: -1.75, y: 5.8, z: -5 },
+  "FRIDGE-UPPER-R": { width: 1.25, depth: 1, height: 1.25, x: -0.25, y: 5.8, z: -5 },
+
   "W1-UPPER-1": { width: 1.25, depth: 1, height: 2.5, y: 4.5 },
   "W1-UPPER-2": { width: 1.25, depth: 1, height: 2.5, y: 4.5 },
   "W1-UPPER-3": { width: 1.25, depth: 1, height: 2.5, y: 4.5 },
   "W1-UPPER-4": { width: 1.25, depth: 1, height: 2.5, y: 4.5 },
   "W1-UPPER-5": { width: 1.25, depth: 1, height: 2.5, y: 4.5 },
+
   "W1-BASE-1": { width: 1.25, depth: 2.58, height: 2.5 },
   "W1-BASE-2": { width: 1.25, depth: 2.58, height: 2.5 },
   "W1-BASE-3": { width: 1.25, depth: 2.58, height: 2.5 },
   "W1-BASE-4": { width: 1.25, depth: 2.58, height: 2.5 },
   "W1-BASE-5": { width: 1.25, depth: 2.58, height: 2.5 },
 
-  // Wall 2 units
+  // WALL 2
   "W2-UPPER-L1": { width: 1, depth: 1, height: 2.5 },
   "W2-UPPER-L2": { width: 1, depth: 1, height: 2.5 },
+
   "W2-DRAWERS": { width: 1.25, depth: 1.5, height: 2.5 },
+
   "W2-BASE-L1": { width: 1.25, depth: 2.58, height: 2.5 },
   "W2-BASE-L2": { width: 1.25, depth: 2.58, height: 2.5 },
   "W2-BASE-L3": { width: 1.25, depth: 2.58, height: 2.5 },
+
   STOVE: { width: 2.5, depth: 2, height: 0.2 },
   DISHWASHER: { width: 2, depth: 2, height: 2.5 },
+
   "W2-DW-UPPER-1": { width: 1, depth: 1, height: 2.5 },
   "W2-DW-UPPER-2": { width: 1, depth: 1, height: 2.5 },
+
   SINK: { width: 3, depth: 2, height: 2.5 },
+
   "W2-MICRO-UPPER-L": { width: 1.25, depth: 1, height: 2 },
   "W2-MICRO-UPPER-R": { width: 1.25, depth: 1, height: 2 },
+
   "W2-UPPER-R1": { width: 1.25, depth: 1, height: 2.5 },
   "W2-UPPER-R2": { width: 1.25, depth: 1, height: 2.5 },
+
   "W2-BASE-R1": { width: 1.5, depth: 2.58, height: 2.5 },
 
-  // Peninsulas
+  // PENINSULA 1
   "PEN1-BASE-1": { width: 1.5, depth: 2.58, height: 2.5 },
   "PEN1-BASE-2": { width: 1.5, depth: 2.58, height: 2.5 },
   "PEN1-BASE-3": { width: 1.5, depth: 2.58, height: 2.5 },
+
   "PEN1-UPPER-1": { width: 1.25, depth: 1, height: 2 },
   "PEN1-UPPER-2": { width: 1.25, depth: 1, height: 2 },
   "PEN1-UPPER-3": { width: 1.25, depth: 1, height: 2 },
   "PEN1-UPPER-4": { width: 1.25, depth: 1, height: 2 },
 
+  // PENINSULA 2
   "PEN2-BASE-1": { width: 1.5, depth: 2.58, height: 2.5 },
   "PEN2-BASE-2": { width: 1.5, depth: 2.58, height: 2.5 },
   "PEN2-BASE-3": { width: 1.5, depth: 2.58, height: 2.5 },
+
   "PEN2-UPPER-1": { width: 1.25, depth: 1, height: 2 },
   "PEN2-UPPER-2": { width: 1.25, depth: 1, height: 2 },
   "PEN2-UPPER-3": { width: 1.25, depth: 1, height: 2 },
   "PEN2-UPPER-4": { width: 1.25, depth: 1, height: 2 },
 
-  // Island
+  // ISLAND
   "ISL-1": { width: 1.25, depth: 2.58, height: 2.5 },
   "ISL-2": { width: 1.25, depth: 2.58, height: 2.5 },
 };
