@@ -329,7 +329,7 @@ export const GEOMETRY: Record<
   "W2-UPPER-R2": { width: 1.25, depth: 1, height: 2.5 },
   "W2-BASE-R1": { width: 1.5, depth: 2.58, height: 2.5 },
 
-  // Peninsula 1 – uppers connected in a row
+  // Peninsula 1 – uppers CONNECTED IN A ROW (same y, same depth, sequential x)
   "PEN1-BASE-1": { width: 1.5, depth: 2.58, height: 2.5, x: 0, z: 0 },
   "PEN1-BASE-2": { width: 1.5, depth: 2.58, height: 2.5, x: 1.5, z: 0 },
   "PEN1-BASE-3": { width: 1.5, depth: 2.58, height: 2.5, x: 3, z: 0 },
@@ -339,7 +339,7 @@ export const GEOMETRY: Record<
   "PEN1-UPPER-3": { width: 1.25, depth: 1, height: 2, x: 2.5, y: 4.5, z: 0 },
   "PEN1-UPPER-4": { width: 1.25, depth: 1, height: 2, x: 3.75, y: 4.5, z: 0 },
 
-  // Peninsula 2 – uppers connected in a row
+  // Peninsula 2 – uppers CONNECTED IN A ROW (same y, same depth, sequential x)
   "PEN2-BASE-1": { width: 1.5, depth: 2.58, height: 2.5, x: 0, z: 3 },
   "PEN2-BASE-2": { width: 1.5, depth: 2.58, height: 2.5, x: 1.5, z: 3 },
   "PEN2-BASE-3": { width: 1.5, depth: 2.58, height: 2.5, x: 3, z: 3 },
