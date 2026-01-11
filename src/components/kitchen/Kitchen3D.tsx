@@ -82,6 +82,9 @@ const UNIT_POSITIONS: Record<
   "PEN1-UPPER-2": { pos: [3.2, 3.75, 1.95], size: [1.25, 2.5, 1.5], type: "upper-split", handleDir: "left" },
   "PEN1-UPPER-3": { pos: [3.2, 3.75, 0.45], size: [1.25, 2.5, 1.5], type: "upper-split", handleDir: "left" },
   "PEN1-UPPER-4": { pos: [3.2, 3.75, -1.05], size: [1.25, 2.5, 1.5], type: "upper-split", handleDir: "left" },
+<<<<<<< Updated upstream
+>>>>>>> Stashed changes
+=======
 >>>>>>> Stashed changes
 
   // PENINSULA 2 - bases front–back, uppers in a side‑by‑side run facing INWARD (toward kitchen)
@@ -90,16 +93,22 @@ const UNIT_POSITIONS: Record<
   "PEN2-BASE-3": { pos: [-10.8, 1.25, 0.45], size: [1.5, 2.5, 1.5], type: "base-drawer", handleDir: "right" },
 
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
   // PEN2 uppers - connected run facing inward (toward kitchen center)
   "PEN2-UPPER-1": { pos: [-10.8, 4.5, 4.75], size: [1.5, 2.5, 1], type: "glass", handleDir: "right" },
   "PEN2-UPPER-2": { pos: [-10.8, 4.5, 3.75], size: [1.5, 2.5, 1], type: "glass", handleDir: "right" },
   "PEN2-UPPER-3": { pos: [-10.8, 4.5, 2.75], size: [1.5, 2.5, 1], type: "glass", handleDir: "right" },
   "PEN2-UPPER-4": { pos: [-10.8, 4.5, 1.75], size: [1.5, 2.5, 1], type: "glass", handleDir: "right" },
 =======
+=======
+>>>>>>> Stashed changes
   "PEN2-UPPER-1": { pos: [-10.8, 3.75, 3.45], size: [1.25, 2.5, 1.5], type: "glass", handleDir: "right" },
   "PEN2-UPPER-2": { pos: [-10.8, 3.75, 1.95], size: [1.25, 2.5, 1.5], type: "glass", handleDir: "right" },
   "PEN2-UPPER-3": { pos: [-10.8, 3.75, 0.45], size: [1.25, 2.5, 1.5], type: "glass", handleDir: "right" },
   "PEN2-UPPER-4": { pos: [-10.8, 3.75, -1.05], size: [1.25, 2.5, 1.5], type: "glass", handleDir: "right" },
+<<<<<<< Updated upstream
+>>>>>>> Stashed changes
+=======
 >>>>>>> Stashed changes
 
   // ISLAND - connected block
