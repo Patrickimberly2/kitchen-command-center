@@ -60,20 +60,21 @@ const UNIT_POSITIONS: Record<
   "W2-MICRO-UPPER-R": { pos: [-3.9, 5.5, 5.5], size: [1.2, 1.5, 1], type: "cabinet", handleDir: "back" },
   SINK: { pos: [0.075, 1.25, 5.5], size: [2.5, 2.5, 2.6], type: "sink-cabinet", handleDir: "back" },
   "W2-BASE-R1": { pos: [1.45, 1.25, 5.5], size: [1.25, 2.5, 2.6], type: "base-drawer", handleDir: "back" },
-  // W2 Right Uppers - R2 right side aligned with W2-DRAWERS right edge, R1 connected to R2
+  // W2 Right Uppers - R2 right side aligned with W2-DRAWERS right edge (3.2), R1 connected to R2
   "W2-UPPER-R1": { pos: [1.325, 4.5, 5.5], size: [1.25, 2.5, 1], type: "upper-split", handleDir: "back" },
   "W2-UPPER-R2": { pos: [2.575, 4.5, 5.5], size: [1.25, 2.5, 1], type: "upper-split", handleDir: "back" },
 
   // PENINSULA 1 - bases front–back, uppers in a side‑by‑side run facing INWARD (toward kitchen)
-  "PEN1-BASE-1": { pos: [3.2, 1.25, 3.45], size: [1.5, 2.5, 1.5], type: "base-drawer", handleDir: "left" },
-  "PEN1-BASE-2": { pos: [3.2, 1.25, 1.95], size: [1.5, 2.5, 1.5], type: "base-drawer", handleDir: "left" },
-  "PEN1-BASE-3": { pos: [3.2, 1.25, 0.45], size: [1.5, 2.5, 1.5], type: "base-drawer", handleDir: "left" },
+  // PEN1-BASE-1 left edge connects to drawer stack right edge (3.2)
+  "PEN1-BASE-1": { pos: [3.95, 1.25, 3.45], size: [1.5, 2.5, 1.5], type: "base-drawer", handleDir: "left" },
+  "PEN1-BASE-2": { pos: [3.95, 1.25, 1.95], size: [1.5, 2.5, 1.5], type: "base-drawer", handleDir: "left" },
+  "PEN1-BASE-3": { pos: [3.95, 1.25, 0.45], size: [1.5, 2.5, 1.5], type: "base-drawer", handleDir: "left" },
 
-  // PEN1 uppers - connected run from drawer stack (z=5.5) toward kitchen interior
-  "PEN1-UPPER-1": { pos: [3.2, 4.5, 4.75], size: [1.5, 2.5, 1], type: "upper-split", handleDir: "left" },
-  "PEN1-UPPER-2": { pos: [3.2, 4.5, 3.75], size: [1.5, 2.5, 1], type: "upper-split", handleDir: "left" },
-  "PEN1-UPPER-3": { pos: [3.2, 4.5, 2.75], size: [1.5, 2.5, 1], type: "upper-split", handleDir: "left" },
-  "PEN1-UPPER-4": { pos: [3.2, 4.5, 1.75], size: [1.5, 2.5, 1], type: "upper-split", handleDir: "left" },
+  // PEN1 uppers - connected run, left edge of UPPER-1 aligns with drawer stack right edge (3.2)
+  "PEN1-UPPER-1": { pos: [3.95, 4.5, 4.75], size: [1.5, 2.5, 1], type: "upper-split", handleDir: "left" },
+  "PEN1-UPPER-2": { pos: [3.95, 4.5, 3.75], size: [1.5, 2.5, 1], type: "upper-split", handleDir: "left" },
+  "PEN1-UPPER-3": { pos: [3.95, 4.5, 2.75], size: [1.5, 2.5, 1], type: "upper-split", handleDir: "left" },
+  "PEN1-UPPER-4": { pos: [3.95, 4.5, 1.75], size: [1.5, 2.5, 1], type: "upper-split", handleDir: "left" },
 
   // PENINSULA 2 - bases front–back, uppers in a side‑by‑side run facing INWARD (toward kitchen)
   "PEN2-BASE-1": { pos: [-10.8, 1.25, 3.45], size: [1.5, 2.5, 1.5], type: "base-drawer", handleDir: "right" },
