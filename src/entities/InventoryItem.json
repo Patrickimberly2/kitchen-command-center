@@ -1,0 +1,65 @@
+{
+  "name": "InventoryItem",
+  "type": "object",
+  "properties": {
+    "name": {
+      "type": "string",
+      "description": "Name of the item"
+    },
+    "zone_id": {
+      "type": "string",
+      "description": "ID of the kitchen zone where item is stored"
+    },
+    "category": {
+      "type": "string",
+      "enum": [
+        "food",
+        "cookware",
+        "utensils",
+        "appliances",
+        "dishes",
+        "storage",
+        "cleaning",
+        "spices",
+        "beverages",
+        "other"
+      ],
+      "description": "Category of the item"
+    },
+    "quantity": {
+      "type": "number",
+      "description": "Quantity of the item"
+    },
+    "unit": {
+      "type": "string",
+      "description": "Unit of measurement"
+    },
+    "expiry_date": {
+      "type": "string",
+      "format": "date",
+      "description": "Expiration date for perishables"
+    },
+    "purchase_date": {
+      "type": "string",
+      "format": "date",
+      "description": "When the item was purchased"
+    },
+    "notes": {
+      "type": "string",
+      "description": "Additional notes"
+    },
+    "image_url": {
+      "type": "string",
+      "description": "Image of the item"
+    },
+    "low_stock_threshold": {
+      "type": "number",
+      "description": "Alert when quantity falls below this"
+    }
+  },
+  "required": [
+    "name",
+    "zone_id",
+    "category"
+  ]
+}

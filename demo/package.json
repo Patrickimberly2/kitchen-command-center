@@ -1,0 +1,23 @@
+{
+  "name": "inventory",
+  "version": "1.0.0",
+  "description": "kitchen supplies",
+  "keywords": [
+    "kitchen"
+  ],
+  "homepage": "https://github.com/Patrickimberly2/Claude-Servers#readme",
+  "bugs": {
+    "url": "https://github.com/Patrickimberly2/Claude-Servers/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Patrickimberly2/Claude-Servers.git"
+  },
+  "license": "UNLICENSED",
+  "author": "kimberly",
+  "type": "commonjs",
+  "main": "index.js",
+  "scripts": {
+    "test": "Where does the item go?"
+  }
+}

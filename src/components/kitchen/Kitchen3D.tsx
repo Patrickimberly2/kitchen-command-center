@@ -21,6 +21,7 @@ const UNIT_POSITIONS: Record<
       | "upper-split"
       | "sink-cabinet";
     handleDir?: "front" | "back" | "left" | "right";
+    rotation?: [number, number, number];
   }
 > = {
   // WALL-1: Fridge & Pantry Wall - Shifted W1 cabinets to not be behind fridge
@@ -69,22 +70,37 @@ const UNIT_POSITIONS: Record<
   "PEN1-BASE-2": { pos: [3.95, 1.25, 1.95], size: [1.5, 2.5, 1.5], type: "base-drawer", handleDir: "left" },
   "PEN1-BASE-3": { pos: [3.95, 1.25, 0.45], size: [1.5, 2.5, 1.5], type: "base-drawer", handleDir: "left" },
 
+<<<<<<< Updated upstream
   // PEN1 uppers - connected run, left edge of UPPER-1 aligns with drawer stack right edge (3.2)
   "PEN1-UPPER-1": { pos: [3.95, 4.5, 4.75], size: [1.5, 2.5, 1], type: "upper-split", handleDir: "left" },
   "PEN1-UPPER-2": { pos: [3.95, 4.5, 3.75], size: [1.5, 2.5, 1], type: "upper-split", handleDir: "left" },
   "PEN1-UPPER-3": { pos: [3.95, 4.5, 2.75], size: [1.5, 2.5, 1], type: "upper-split", handleDir: "left" },
   "PEN1-UPPER-4": { pos: [3.95, 4.5, 1.75], size: [1.5, 2.5, 1], type: "upper-split", handleDir: "left" },
+=======
+  // all uppers same z as center base (1.95), same y; x steps so sides touch
+  "PEN1-UPPER-1": { pos: [3.2, 3.75, 3.45], size: [1.25, 2.5, 1.5], type: "upper-split", handleDir: "left" },
+  "PEN1-UPPER-2": { pos: [3.2, 3.75, 1.95], size: [1.25, 2.5, 1.5], type: "upper-split", handleDir: "left" },
+  "PEN1-UPPER-3": { pos: [3.2, 3.75, 0.45], size: [1.25, 2.5, 1.5], type: "upper-split", handleDir: "left" },
+  "PEN1-UPPER-4": { pos: [3.2, 3.75, -1.05], size: [1.25, 2.5, 1.5], type: "upper-split", handleDir: "left" },
+>>>>>>> Stashed changes
 
   // PENINSULA 2 - bases front–back, uppers in a side‑by‑side run facing INWARD (toward kitchen)
   "PEN2-BASE-1": { pos: [-10.8, 1.25, 3.45], size: [1.5, 2.5, 1.5], type: "base-drawer", handleDir: "right" },
   "PEN2-BASE-2": { pos: [-10.8, 1.25, 1.95], size: [1.5, 2.5, 1.5], type: "base-drawer", handleDir: "right" },
   "PEN2-BASE-3": { pos: [-10.8, 1.25, 0.45], size: [1.5, 2.5, 1.5], type: "base-drawer", handleDir: "right" },
 
+<<<<<<< Updated upstream
   // PEN2 uppers - connected run facing inward (toward kitchen center)
   "PEN2-UPPER-1": { pos: [-10.8, 4.5, 4.75], size: [1.5, 2.5, 1], type: "glass", handleDir: "right" },
   "PEN2-UPPER-2": { pos: [-10.8, 4.5, 3.75], size: [1.5, 2.5, 1], type: "glass", handleDir: "right" },
   "PEN2-UPPER-3": { pos: [-10.8, 4.5, 2.75], size: [1.5, 2.5, 1], type: "glass", handleDir: "right" },
   "PEN2-UPPER-4": { pos: [-10.8, 4.5, 1.75], size: [1.5, 2.5, 1], type: "glass", handleDir: "right" },
+=======
+  "PEN2-UPPER-1": { pos: [-10.8, 3.75, 3.45], size: [1.25, 2.5, 1.5], type: "glass", handleDir: "right" },
+  "PEN2-UPPER-2": { pos: [-10.8, 3.75, 1.95], size: [1.25, 2.5, 1.5], type: "glass", handleDir: "right" },
+  "PEN2-UPPER-3": { pos: [-10.8, 3.75, 0.45], size: [1.25, 2.5, 1.5], type: "glass", handleDir: "right" },
+  "PEN2-UPPER-4": { pos: [-10.8, 3.75, -1.05], size: [1.25, 2.5, 1.5], type: "glass", handleDir: "right" },
+>>>>>>> Stashed changes
 
   // ISLAND - connected block
   "ISL-1": { pos: [-2.625, 1.25, 0], size: [1.25, 2.5, 2.6], type: "cabinet" },
@@ -180,14 +196,19 @@ function UnitMesh({ unitId, label, zones, selectedZoneId, onClick }: UnitMeshPro
 
   if (!config) return null;
 
-  const { pos, size, type, handleDir = "front" } = config;
+  const { pos, size, type, handleDir = "front", rotation = [0, 0, 0] as [number, number, number] } = config;
   const color = getUnitColor(unitId, type);
 
-  // Helper to get handle rotation
-  const handleRotation =
-    handleDir === "left" || handleDir === "right"
-      ? ([0, Math.PI / 2, 0] as [number, number, number])
-      : ([0, 0, 0] as [number, number, number]);
+  // Force PEN1 upper cabinets to rotate 180 degrees from their current orientation
+  let handleRotation: [number, number, number];
+  if (["PEN1-UPPER-1", "PEN1-UPPER-2", "PEN1-UPPER-3", "PEN1-UPPER-4"].includes(unitId)) {
+    handleRotation = [0, Math.PI, 0];
+  } else {
+    handleRotation =
+      handleDir === "left" || handleDir === "right"
+        ? ([0, Math.PI / 2, 0] as [number, number, number])
+        : ([0, 0, 0] as [number, number, number]);
+  }
 
   const getHandleOffset = (): [number, number, number] => {
     switch (handleDir) {
@@ -210,7 +231,7 @@ function UnitMesh({ unitId, label, zones, selectedZoneId, onClick }: UnitMeshPro
     const zoneHeight = size[1] / 5;
 
     return (
-      <group position={pos}>
+      <group position={pos} rotation={rotation}>
         {/* Outer shell */}
         <RoundedBox args={[size[0], size[1], size[2]]} radius={0.03} smoothness={4}>
           <meshStandardMaterial
@@ -260,7 +281,7 @@ function UnitMesh({ unitId, label, zones, selectedZoneId, onClick }: UnitMeshPro
   if (type === "pantry") {
     const zoneHeight = size[1] / 8;
     return (
-      <group position={pos}>
+      <group position={pos} rotation={rotation}>
         <RoundedBox args={[size[0], size[1], size[2]]} radius={0.03} smoothness={4}>
           <meshStandardMaterial
             color={COLORS.applianceWhite}
@@ -298,7 +319,7 @@ function UnitMesh({ unitId, label, zones, selectedZoneId, onClick }: UnitMeshPro
     const rightDoorZones = zones.filter((z) => z.includes("RightDoor"));
 
     return (
-      <group position={pos}>
+      <group position={pos} rotation={rotation}>
         {/* Main body */}
         <RoundedBox args={[size[0], size[1], size[2]]} radius={0.03} smoothness={4}>
           <meshStandardMaterial
@@ -442,7 +463,7 @@ function UnitMesh({ unitId, label, zones, selectedZoneId, onClick }: UnitMeshPro
   if (type === "drawer") {
     const drawerHeight = size[1] / 3;
     return (
-      <group position={pos}>
+      <group position={pos} rotation={rotation}>
         {zones.map((zone, i) => (
           <ZoneMesh
             key={zone}
@@ -472,7 +493,7 @@ function UnitMesh({ unitId, label, zones, selectedZoneId, onClick }: UnitMeshPro
     const doorHeight = size[1] * 0.7;
 
     return (
-      <group position={pos}>
+      <group position={pos} rotation={rotation}>
         {/* Drawer zone (top) */}
         {drawerZone && (
           <ZoneMesh
@@ -535,7 +556,7 @@ function UnitMesh({ unitId, label, zones, selectedZoneId, onClick }: UnitMeshPro
     const halfHeight = size[1] / 2;
 
     return (
-      <group position={pos}>
+      <group position={pos} rotation={rotation}>
         {topZone && (
           <ZoneMesh
             zoneId={topZone}
@@ -578,7 +599,7 @@ function UnitMesh({ unitId, label, zones, selectedZoneId, onClick }: UnitMeshPro
     const halfWidth = size[0] / 2;
 
     return (
-      <group position={pos}>
+      <group position={pos} rotation={rotation}>
         {leftDoor && (
           <ZoneMesh
             zoneId={leftDoor}
@@ -613,7 +634,7 @@ function UnitMesh({ unitId, label, zones, selectedZoneId, onClick }: UnitMeshPro
   // Stove special rendering
   if (unitId === "STOVE") {
     return (
-      <group position={pos}>
+      <group position={pos} rotation={rotation}>
         <mesh
           onClick={(e) => {
             e.stopPropagation();
@@ -651,7 +672,7 @@ function UnitMesh({ unitId, label, zones, selectedZoneId, onClick }: UnitMeshPro
     const halfHeight = size[1] / 2;
 
     return (
-      <group position={pos}>
+      <group position={pos} rotation={rotation}>
         <RoundedBox args={size} radius={0.02} smoothness={4}>
           <meshStandardMaterial color="#d4b896" roughness={0.5} metalness={0.05} transparent opacity={0.3} />
         </RoundedBox>
@@ -696,7 +717,7 @@ function UnitMesh({ unitId, label, zones, selectedZoneId, onClick }: UnitMeshPro
   const isSelected = zones.some((z) => selectedZoneId === z) || selectedZoneId === zones[0];
 
   return (
-    <group position={pos}>
+    <group position={pos} rotation={rotation}>
       <RoundedBox
         args={size}
         radius={0.03}

@@ -1,0 +1,73 @@
+{
+  "name": "KitchenZone",
+  "type": "object",
+  "properties": {
+    "name": {
+      "type": "string",
+      "description": "Name of the storage zone"
+    },
+    "zone_type": {
+      "type": "string",
+      "enum": [
+        "upper_cabinet",
+        "lower_cabinet",
+        "drawer",
+        "pantry",
+        "refrigerator",
+        "freezer",
+        "island",
+        "peninsula",
+        "appliance",
+        "shelf",
+        "countertop"
+      ],
+      "description": "Type of storage zone"
+    },
+    "position": {
+      "type": "object",
+      "description": "3D position in kitchen layout",
+      "properties": {
+        "x": {
+          "type": "number"
+        },
+        "y": {
+          "type": "number"
+        },
+        "z": {
+          "type": "number"
+        }
+      }
+    },
+    "dimensions": {
+      "type": "object",
+      "description": "Size of the zone",
+      "properties": {
+        "width": {
+          "type": "number"
+        },
+        "height": {
+          "type": "number"
+        },
+        "depth": {
+          "type": "number"
+        }
+      }
+    },
+    "color": {
+      "type": "string",
+      "description": "Display color for the zone"
+    },
+    "icon": {
+      "type": "string",
+      "description": "Icon identifier for the zone"
+    },
+    "notes": {
+      "type": "string",
+      "description": "Additional notes about this zone"
+    }
+  },
+  "required": [
+    "name",
+    "zone_type"
+  ]
+}
