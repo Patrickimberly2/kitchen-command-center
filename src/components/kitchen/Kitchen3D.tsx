@@ -59,7 +59,6 @@ const UNIT_POSITIONS: Record<
   "W2-MICRO-UPPER-L": { pos: [-5.1, 5.5, 5.5], size: [1.2, 1.5, 1], type: "cabinet", handleDir: "back" },
   "W2-MICRO-UPPER-R": { pos: [-3.9, 5.5, 5.5], size: [1.2, 1.5, 1], type: "cabinet", handleDir: "back" },
   SINK: { pos: [0.075, 1.25, 5.5], size: [2.5, 2.5, 2.6], type: "sink-cabinet", handleDir: "back" },
-  "W2-BASE-R1": { pos: [1.45, 1.25, 5.5], size: [1.25, 2.5, 2.6], type: "base-drawer", handleDir: "back" },
   // W2 Right Uppers - R2 right side aligned with W2-DRAWERS right edge (3.2), R1 connected to R2
   "W2-UPPER-R1": { pos: [1.325, 4.5, 5.5], size: [1.25, 2.5, 1], type: "upper-split", handleDir: "back" },
   "W2-UPPER-R2": { pos: [2.575, 4.5, 5.5], size: [1.25, 2.5, 1], type: "upper-split", handleDir: "back" },
