@@ -45,9 +45,10 @@ const UNIT_POSITIONS: Record<
   "W1-UPPER-5": { pos: [3.9, 4.5, -5.5], size: [1.35, 2.5, 1], type: "upper-split" },
 
   // WALL-2: Sink & Stove Wall
+  // W2 Left Uppers - connected run (no gap between L1 and L2)
   "W2-UPPER-L1": { pos: [-10, 4.5, 5.5], size: [1, 2.5, 1], type: "upper-split", handleDir: "back" },
-  "W2-UPPER-L2": { pos: [-8.65, 4.5, 5.5], size: [1, 2.5, 1], type: "upper-split", handleDir: "back" },
-  "W2-DRAWERS": { pos: [1.95, 1.25, 5.5], size: [1.25, 2.5, 2.6], type: "drawer", handleDir: "back" },
+  "W2-UPPER-L2": { pos: [-9, 4.5, 5.5], size: [1, 2.5, 1], type: "upper-split", handleDir: "back" },
+  "W2-DRAWERS": { pos: [2.575, 1.25, 5.5], size: [1.25, 2.5, 2.6], type: "drawer", handleDir: "back" },
   "W2-BASE-L1": { pos: [-6.425, 1.25, 5.5], size: [1.5, 2.5, 2.6], type: "base-drawer", handleDir: "back" },
   "W2-BASE-L2": { pos: [-7.925, 1.25, 5.5], size: [1.5, 2.5, 2.6], type: "base-drawer", handleDir: "back" },
   "W2-BASE-L3": { pos: [-9.425, 1.25, 5.5], size: [1.5, 2.5, 2.6], type: "base-drawer", handleDir: "back" },
@@ -59,29 +60,31 @@ const UNIT_POSITIONS: Record<
   "W2-MICRO-UPPER-R": { pos: [-3.9, 5.5, 5.5], size: [1.2, 1.5, 1], type: "cabinet", handleDir: "back" },
   SINK: { pos: [0.075, 1.25, 5.5], size: [2.5, 2.5, 2.6], type: "sink-cabinet", handleDir: "back" },
   "W2-BASE-R1": { pos: [1.45, 1.25, 5.5], size: [1.25, 2.5, 2.6], type: "base-drawer", handleDir: "back" },
-  "W2-UPPER-R1": { pos: [-0.5, 4.5, 5.5], size: [1.25, 2.5, 1], type: "upper-split", handleDir: "back" },
-  "W2-UPPER-R2": { pos: [0.75, 4.5, 5.5], size: [1.25, 2.5, 1], type: "upper-split", handleDir: "back" },
+  // W2 Right Uppers - aligned flush with right edge of W2-DRAWERS
+  "W2-UPPER-R1": { pos: [1.95, 4.5, 5.5], size: [1.25, 2.5, 1], type: "upper-split", handleDir: "back" },
+  "W2-UPPER-R2": { pos: [3.2, 4.5, 5.5], size: [1.25, 2.5, 1], type: "upper-split", handleDir: "back" },
 
-  // PENINSULA 1 - bases front–back, uppers in a side‑by‑side run facing left
-  "PEN1-BASE-1": { pos: [3.2, 1.25, 3.45], size: [1.25, 2.5, 1.5], type: "base-drawer", handleDir: "left" },
-  "PEN1-BASE-2": { pos: [3.2, 1.25, 1.95], size: [1.25, 2.5, 1.5], type: "base-drawer", handleDir: "left" },
-  "PEN1-BASE-3": { pos: [3.2, 1.25, 0.45], size: [1.25, 2.5, 1.5], type: "base-drawer", handleDir: "left" },
+  // PENINSULA 1 - bases front–back, uppers in a side‑by‑side run facing INWARD (toward kitchen)
+  "PEN1-BASE-1": { pos: [3.2, 1.25, 3.45], size: [1.5, 2.5, 1.5], type: "base-drawer", handleDir: "left" },
+  "PEN1-BASE-2": { pos: [3.2, 1.25, 1.95], size: [1.5, 2.5, 1.5], type: "base-drawer", handleDir: "left" },
+  "PEN1-BASE-3": { pos: [3.2, 1.25, 0.45], size: [1.5, 2.5, 1.5], type: "base-drawer", handleDir: "left" },
 
-  // all uppers same z as center base (1.95), same y; x steps so sides touch
-  "PEN1-UPPER-1": { pos: [1.7, 4.5, 1.95], size: [1.25, 2.5, 1], type: "upper-split", handleDir: "left" },
-  "PEN1-UPPER-2": { pos: [2.95, 4.5, 1.95], size: [1.25, 2.5, 1], type: "upper-split", handleDir: "left" },
-  "PEN1-UPPER-3": { pos: [4.2, 4.5, 1.95], size: [1.25, 2.5, 1], type: "upper-split", handleDir: "left" },
-  "PEN1-UPPER-4": { pos: [5.45, 4.5, 1.95], size: [1.25, 2.5, 1], type: "upper-split", handleDir: "left" },
+  // PEN1 uppers - horizontal row facing inward (toward kitchen center), matching base cabinet span
+  "PEN1-UPPER-1": { pos: [3.2, 4.5, 3.45], size: [1.5, 2.5, 1], type: "upper-split", handleDir: "left" },
+  "PEN1-UPPER-2": { pos: [3.2, 4.5, 1.95], size: [1.5, 2.5, 1], type: "upper-split", handleDir: "left" },
+  "PEN1-UPPER-3": { pos: [3.2, 4.5, 0.45], size: [1.5, 2.5, 1], type: "upper-split", handleDir: "left" },
+  "PEN1-UPPER-4": { pos: [3.2, 4.5, -1.05], size: [1.5, 2.5, 1], type: "upper-split", handleDir: "left" },
 
-  // PENINSULA 2 - bases front–back, uppers in a side‑by‑side run facing right
-  "PEN2-BASE-1": { pos: [-10.8, 1.25, 3.45], size: [1.25, 2.5, 1.5], type: "base-drawer", handleDir: "right" },
-  "PEN2-BASE-2": { pos: [-10.8, 1.25, 1.95], size: [1.25, 2.5, 1.5], type: "base-drawer", handleDir: "right" },
-  "PEN2-BASE-3": { pos: [-10.8, 1.25, 0.45], size: [1.25, 2.5, 1.5], type: "base-drawer", handleDir: "right" },
+  // PENINSULA 2 - bases front–back, uppers in a side‑by‑side run facing INWARD (toward kitchen)
+  "PEN2-BASE-1": { pos: [-10.8, 1.25, 3.45], size: [1.5, 2.5, 1.5], type: "base-drawer", handleDir: "right" },
+  "PEN2-BASE-2": { pos: [-10.8, 1.25, 1.95], size: [1.5, 2.5, 1.5], type: "base-drawer", handleDir: "right" },
+  "PEN2-BASE-3": { pos: [-10.8, 1.25, 0.45], size: [1.5, 2.5, 1.5], type: "base-drawer", handleDir: "right" },
 
-  "PEN2-UPPER-1": { pos: [-12.3, 4.5, 1.95], size: [1.25, 2.5, 1], type: "glass", handleDir: "right" },
-  "PEN2-UPPER-2": { pos: [-11.05, 4.5, 1.95], size: [1.25, 2.5, 1], type: "glass", handleDir: "right" },
-  "PEN2-UPPER-3": { pos: [-9.8, 4.5, 1.95], size: [1.25, 2.5, 1], type: "glass", handleDir: "right" },
-  "PEN2-UPPER-4": { pos: [-8.55, 4.5, 1.95], size: [1.25, 2.5, 1], type: "glass", handleDir: "right" },
+  // PEN2 uppers - horizontal row facing inward (toward kitchen center), matching base cabinet span
+  "PEN2-UPPER-1": { pos: [-10.8, 4.5, 3.45], size: [1.5, 2.5, 1], type: "glass", handleDir: "right" },
+  "PEN2-UPPER-2": { pos: [-10.8, 4.5, 1.95], size: [1.5, 2.5, 1], type: "glass", handleDir: "right" },
+  "PEN2-UPPER-3": { pos: [-10.8, 4.5, 0.45], size: [1.5, 2.5, 1], type: "glass", handleDir: "right" },
+  "PEN2-UPPER-4": { pos: [-10.8, 4.5, -1.05], size: [1.5, 2.5, 1], type: "glass", handleDir: "right" },
 
   // ISLAND - connected block
   "ISL-1": { pos: [-2.625, 1.25, 0], size: [1.25, 2.5, 2.6], type: "cabinet" },
@@ -199,9 +202,13 @@ function UnitMesh({ unitId, label, zones, selectedZoneId, onClick }: UnitMeshPro
     }
   };
 
-  // Freezer: 5 zones stacked vertically (4 shelves + 1 bin)
+  // Freezer: interior zones + 4 door bins
   if (type === "freezer") {
+    // Filter interior shelves and door bins
+    const interiorZones = zones.filter((z) => z.includes("Shelf") || z.includes("Bin") && !z.includes("Door"));
+    const doorBinZones = zones.filter((z) => z.includes("DoorBin"));
     const zoneHeight = size[1] / 5;
+
     return (
       <group position={pos}>
         {/* Outer shell */}
@@ -214,17 +221,30 @@ function UnitMesh({ unitId, label, zones, selectedZoneId, onClick }: UnitMeshPro
             opacity={0.3}
           />
         </RoundedBox>
-        {/* 5 clickable zones */}
-        {zones.map((zone, i) => (
+        {/* Interior zones - 4 shelves + 1 bottom bin */}
+        {interiorZones.map((zone, i) => (
           <ZoneMesh
             key={zone}
             zoneId={zone}
             position={[0, size[1] / 2 - zoneHeight * (i + 0.5), 0]}
-            size={[size[0] - 0.1, zoneHeight - 0.05, size[2] - 0.1]}
-            color={i === 4 ? "#e0d4c8" : "#f0ece8"}
+            size={[size[0] - 0.2, zoneHeight - 0.05, size[2] - 0.3]}
+            color={zone.includes("Bin") ? "#e0d4c8" : "#f0ece8"}
             isSelected={selectedZoneId === zone}
             onClick={onClick}
-            label={zone}
+            label={zone.replace("Freezer", "")}
+          />
+        ))}
+        {/* 4 Door bin zones */}
+        {doorBinZones.map((zone, i) => (
+          <ZoneMesh
+            key={zone}
+            zoneId={zone}
+            position={[0, size[1] / 2 - 0.6 - i * 1.2, size[2] / 2 + 0.15]}
+            size={[size[0] - 0.2, 0.9, 0.25]}
+            color="#d8e8f0"
+            isSelected={selectedZoneId === zone}
+            onClick={onClick}
+            label={`Door ${i + 1}`}
           />
         ))}
         <Html position={[0, size[1] / 2 + 0.3, 0]} center distanceFactor={10} style={{ pointerEvents: "none" }}>
