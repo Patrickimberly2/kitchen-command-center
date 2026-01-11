@@ -24,7 +24,17 @@ export const kitchenLayout: Area[] = [
       {
         id: "FREEZER",
         label: "Upright Freezer",
-        zones: ["FreezerShelf1", "FreezerShelf2", "FreezerShelf3", "FreezerShelf4", "FreezerBottomBin"],
+        zones: [
+          "FreezerShelf1",
+          "FreezerShelf2",
+          "FreezerShelf3",
+          "FreezerShelf4",
+          "FreezerBottomBin",
+          "FreezerDoorBin1",
+          "FreezerDoorBin2",
+          "FreezerDoorBin3",
+          "FreezerDoorBin4",
+        ],
       },
       {
         id: "PANTRY",
